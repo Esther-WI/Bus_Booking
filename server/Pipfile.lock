@@ -105,6 +105,7 @@
             "markers": "python_version >= '3.7'",
             "version": "==8.1.8"
         },
+
         "distlib": {
             "hashes": [
                 "sha256:47f8c22fd27c27e25a65601af709b38e4f0a45ea4fc2e710f65755fa8caaaf87",
@@ -145,6 +146,15 @@
             "index": "pypi",
             "markers": "python_version >= '3.7' and python_version < '4'",
             "version": "==4.6.0"
+        },
+        "flask-marshmallow": {
+            "hashes": [
+                "sha256:00ee96399ed664963afff3b5d6ee518640b0f91dbc2aace2b5abcf32f40ef23a",
+                "sha256:10b5048ecfaa26f7c8d0aed7d81083164450e6be8e81c04b3d4a586b3f7b6678"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==1.2.1"
         },
         "flask-migrate": {
             "hashes": [
@@ -457,6 +467,7 @@
             "markers": "python_version >= '3.8'",
             "version": "==2.9.0"
         },
+
         "setuptools": {
             "hashes": [
                 "sha256:3c1383e1038b68556a382c1e8ded8887cd20141b0eb5708a6c8d277de49364f5",
@@ -473,6 +484,7 @@
             "index": "pypi",
             "version": "==1.0.1"
         },
+
         "sqlalchemy": {
             "hashes": [
                 "sha256:023b3ee6169969beea3bb72312e44d8b7c27c75b347942d943cf49397b7edeb5",

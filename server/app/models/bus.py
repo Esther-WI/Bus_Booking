@@ -32,5 +32,3 @@ class Bus(db.Model):
 
     def __repr__(self):
         return f"<Bus model={self.model} driver_id={self.driver_id}>"
-
-    

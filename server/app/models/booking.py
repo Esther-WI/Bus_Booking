@@ -42,4 +42,3 @@ class Booking(db.Model):
 
     def __repr__(self):
         return f"<Booking id={self.id} seat={self.seat_number} status={self.booking_status}>"
-    
