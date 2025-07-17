@@ -1,0 +1,45 @@
+from extensions import db
+from sqlalchemy.orm import validates
+
+class Booking(db.Model):
+    __tablename__ = 'bookings'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    schedule_id = db.Column(db.Integer, db.ForeignKey('schedules.schedule_id'))
+    customer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    seat_number = db.Column(db.Integer, nullable=False)
+    booking_status = db.Column(db.String(20), default='Pending')
+    payment_status = db.Column(db.String(20), default='pending')
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+    def __init__(self, schedule_id, customer_id, seat_number, booking_status='Pending', payment_status='pending', created_at=None):
+        self.schedule_id = schedule_id
+        self.customer_id = customer_id
+        self.seat_number = seat_number
+        self.booking_status = booking_status
+        self.payment_status = payment_status
+        self.created_at = created_at
+
+    @validates('seat_number')
+    def validate_seat_number(self, key, seat_number):
+        if not isinstance(seat_number, int) or seat_number <= 0:
+            raise ValueError("Seat number must be a positive integer")
+        return seat_number
+
+    @validates('booking_status')
+    def validate_booking_status(self, key, booking_status):
+        allowed_statuses = ['Pending', 'Confirmed', 'Cancelled']
+        if booking_status not in allowed_statuses:
+            raise ValueError(f"Booking status must be one of {allowed_statuses}")
+        return booking_status
+
+    @validates('payment_status')
+    def validate_payment_status(self, key, payment_status):
+        allowed_statuses = ['pending', 'paid', 'failed']
+        if payment_status not in allowed_statuses:
+            raise ValueError(f"Payment status must be one of {allowed_statuses}")
+        return payment_status
+
+    def __repr__(self):
+        return f"<Booking id={self.id} seat={self.seat_number} status={self.booking_status}>"
+    
