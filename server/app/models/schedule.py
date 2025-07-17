@@ -12,6 +12,8 @@ class Schedule(db.Model):
     price_per_seat = db.Column(db.Integer, nullable=False)
     status = db.Column(db.String(20), default='available')
     created_at = db.Column(db.DateTime, server_default=db.func.now())
+    
+    bookings = db.relationship('Booking', backref='schedule_obj', lazy=True, foreign_keys='Booking.schedule_id')
 
     def __init__(self, bus_id, route_id, departure_time, arrival_time, price_per_seat, status='available', created_at=None):
         self.bus_id = bus_id

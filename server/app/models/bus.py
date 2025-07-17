@@ -10,6 +10,8 @@ class Bus(db.Model):
     model = db.Column(db.String(100), nullable=False)
     status = db.Column(db.String(20), default='Available')
     created_at = db.Column(db.DateTime, server_default=db.func.now())
+    
+    schedules = db.relationship('Schedule', backref='bus', lazy=True, foreign_keys='Schedule.bus_id')
 
     def __init__(self, driver_id, registration_number, model, status='Available', created_at=None):
         self.driver_id = driver_id

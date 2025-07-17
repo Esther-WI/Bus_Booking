@@ -11,6 +11,9 @@ class Booking(db.Model):
     booking_status = db.Column(db.String(20), default='Pending')
     payment_status = db.Column(db.String(20), default='pending')
     created_at = db.Column(db.DateTime, server_default=db.func.now())
+    
+    schedule = db.relationship('Schedule', backref='bookings', lazy=True)
+    customer = db.relationship('User', backref='bookings', lazy=True, foreign_keys=[customer_id])
 
     def __init__(self, schedule_id, customer_id, seat_number, booking_status='Pending', payment_status='pending', created_at=None):
         self.schedule_id = schedule_id
@@ -42,3 +45,16 @@ class Booking(db.Model):
 
     def __repr__(self):
         return f"<Booking id={self.id} seat={self.seat_number} status={self.booking_status}>"
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'schedule_id': self.schedule_id,
+            'customer_id': self.customer_id,
+            'seat_number': self.seat_number,
+            'booking_status': self.booking_status,
+            'payment_status': self.payment_status,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'schedule': self.schedule.serialize() if hasattr(self.schedule, 'serialize') else None,
+            'customer': self.customer.serialize() if hasattr(self.customer, 'serialize') else None
+        }

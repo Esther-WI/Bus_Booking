@@ -10,6 +10,8 @@ class Route(db.Model):
     distance = db.Column(db.Numeric(8, 2), nullable=False)
     estimated_duration = db.Column(db.Integer, nullable=False)
 
+    schedules = db.relationship('Schedule', backref='route', lazy=True, foreign_keys='Schedule.route_id')
+
     def __init__(self, origin, destination, distance, estimated_duration):
         self.origin = origin
         self.destination = destination

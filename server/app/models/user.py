@@ -12,6 +12,9 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     phone_number = db.Column(db.String(10))
     Role = db.Column(db.String(), nullable=False)
+    
+    bookings = db.relationship('Booking', backref='user', lazy=True, foreign_keys='Booking.customer_id')
+    buses = db.relationship('Bus', backref='driver', lazy=True, foreign_keys='Bus.driver_id')
 
     DEFAULT_ROLES = {"Customer", "Driver", "Admin"}
 
