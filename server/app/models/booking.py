@@ -1,12 +1,12 @@
-from extensions import db
+from app.extensions import db
 from sqlalchemy.orm import validates
 
 class Booking(db.Model):
     __tablename__ = 'bookings'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    schedule_id = db.Column(db.Integer, db.ForeignKey('schedules.schedule_id'))
-    customer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    schedule_id = db.Column(db.Integer, db.ForeignKey('schedules.id'))
+    customer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     seat_number = db.Column(db.Integer, nullable=False)
     booking_status = db.Column(db.String(20), default='Pending')
     payment_status = db.Column(db.String(20), default='pending')

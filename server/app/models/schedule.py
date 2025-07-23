@@ -1,12 +1,13 @@
-from extensions import db
+from app.extensions import db
+
 from sqlalchemy.orm import validates
 
 class Schedule(db.Model):
     __tablename__ = 'schedules'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    bus_id = db.Column(db.Integer, db.ForeignKey('buses.bus_id'))
-    route_id = db.Column(db.Integer, db.ForeignKey('routes.route_id'))
+    bus_id = db.Column(db.Integer, db.ForeignKey('buses.id'))
+    route_id = db.Column(db.Integer, db.ForeignKey('routes.id'))
     departure_time = db.Column(db.DateTime, nullable=False)
     arrival_time = db.Column(db.DateTime, nullable=False)
     price_per_seat = db.Column(db.Integer, nullable=False)

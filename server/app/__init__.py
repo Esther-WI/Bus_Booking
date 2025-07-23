@@ -1,17 +1,19 @@
 from flask import Flask
 from .config import Config
-from .extensions import db, jwt, ma
+from .extensions import db, migrate, jwt, bcrypt
 
-def create_app(config_class=Config):
+def create_app():
     app = Flask(__name__)
-    app.config.from_object(config_class)
+    app.config.from_object(Config)
 
-    # Initialize extensions
     db.init_app(app)
+    migrate.init_app(app, db)
     jwt.init_app(app)
-    ma.init_app(app)
+    bcrypt.init_app(app)
 
-    # Register blueprints
+    # Import models to register them with SQLAlchemy
+    from .models import user, bus, route, schedule, booking
+
     from .routes.auth_routes import auth_bp
     from .routes.admin_routes import admin_bp
     from .routes.driver_routes import driver_bp

@@ -1,4 +1,4 @@
-from extensions import db, bcrypt
+from app.extensions import db, bcrypt
 from sqlalchemy.ext.hybrid import hybrid_property
 import re
 from sqlalchemy.orm import validates
