@@ -1,0 +1,96 @@
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #f8fbff, #e3f2fd);
+  min-height: 80vh;
+  gap: 2rem;
+}
+
+.hero-content {
+  flex: 1 1 450px;
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #0d47a1;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #37474f;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hero-button.primary {
+  background-color: #0d47a1;
+  color: white;
+}
+
+.hero-button.primary:hover {
+  background-color: #08306b;
+}
+
+.hero-button.secondary {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  border: 2px solid #0d47a1;
+}
+
+.hero-button.secondary:hover {
+  background-color: #bbdefb;
+  color: #08306b;
+  border-color: #08306b;
+}
+
+.hero-image {
+  flex: 1 1 400px;
+  text-align: center;
+
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  /* background-image: url('../assets/bus1.jpeg'); Placeholder for the image */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column-reverse;
+    padding: 2rem 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+}

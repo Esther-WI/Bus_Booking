@@ -1,0 +1,180 @@
+/* Search.css */
+
+.search-page {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #f8f9fa;
+}
+
+/* === HERO SECTION === */
+.search-hero {
+  background-image: url('/assets/bus-travel.jpg'); /* Use your own background */
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.search-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+
+.search-hero h2 {
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* === FORM === */
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  flex: 1;
+}
+
+.form-group label {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* === BUTTON === */
+.search-button {
+  background-color: rgb(32, 204, 235);
+  color: #000;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1.2rem;
+}
+
+
+.search-button:hover {
+  background-color: rgb(75, 150, 219);
+}
+
+/* === SPECIAL OFFERS & POPULAR ROUTES === */
+.special-offers-section,
+.popular-routes-section,
+.search-results {
+  padding: 3rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.special-offers-section h2,
+.popular-routes-section h2,
+.search-results h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.offers-grid,
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* === RESULTS === */
+.routes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.loading,
+.error-message,
+.no-routes {
+  text-align: center;
+  margin-top: 1rem;
+  color: #555;
+}
+
+.no-routes p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.no-routes button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.no-routes button:hover {
+  background-color: #0056b3;
+}
+
+/* === MEDIA QUERIES === */
+@media (max-width: 768px) {
+  .search-hero h2 {
+    font-size: 2rem;
+  }
+
+  .form-group input {
+    font-size: 0.9rem;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .search-form {
+    padding: 1.5rem;
+  }
+}

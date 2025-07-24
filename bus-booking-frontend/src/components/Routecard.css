@@ -1,0 +1,57 @@
+/* Routecard.css */
+
+.route-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-width: 260px;
+}
+
+.route-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.route-info h3 {
+  font-size: 1.2rem;
+  color: #1f2937; /* Dark Gray */
+  margin-bottom: 0.5rem;
+}
+
+.route-info p {
+  font-size: 0.95rem;
+  color: #374151;
+  margin: 0.2rem 0;
+}
+
+.route-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.book-button {
+  padding: 0.5rem 1.2rem;
+  background-color: rgb(32, 204, 235);
+  color: #000;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.book-button:hover {
+  background-color: #0bbfd8;
+}
+
+.routes-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  padding: 1rem 0;
+}
