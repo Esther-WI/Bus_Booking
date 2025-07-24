@@ -1,0 +1,153 @@
+/* Search.css */
+
+.search-page {
+  padding: 2rem;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+/* Hero Section with Search Form */
+.search-hero {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.search-hero h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+/* Search Form Layout */
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+.form-group input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Search Button */
+.search-button {
+  padding: 0.65rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+/* Sections */
+.special-offers-section,
+.popular-routes-section,
+.search-results {
+  margin-top: 3rem;
+}
+
+.special-offers-section h2,
+.popular-routes-section h2,
+.search-results h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+/* Grid Layouts */
+.offers-grid,
+.routes-grid,
+.routes-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.offers-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.routes-grid,
+.routes-list {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* Loading and Error States */
+.loading,
+.error-message,
+.no-routes {
+  text-align: center;
+  margin: 2rem 0;
+  color: #444;
+}
+
+.no-routes button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.3rem;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.no-routes button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+}
