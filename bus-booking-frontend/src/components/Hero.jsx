@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Hero.css"; // Assuming you have a CSS file for styling
+import heroBus from "../assets/bus1.jpeg";
 
 const Hero = () => {
   return (
@@ -21,7 +22,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="hero-image">
-        <img src="/assets/hero-bus.jpg" alt="Comfortable bus interior" />
+        <img src={heroBus} alt="Comfortable bus interior" />
       </div>
     </section>
   );

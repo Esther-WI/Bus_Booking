@@ -1,3 +1,12 @@
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaPhoneAlt,
+  FaEnvelope,
+} from "react-icons/fa";
+import "./Footer.css";
+
 const Footer = () => {
   return (
     <footer className="main-footer">
@@ -8,6 +17,29 @@ const Footer = () => {
             Your trusted partner for comfortable and affordable bus travel
             across the nation.
           </p>
+          <div className="social-icons">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebookF />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTwitter />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram />
+            </a>
+          </div>
         </div>
 
         <div className="footer-links">
@@ -49,9 +81,13 @@ const Footer = () => {
 
           <div className="links-column">
             <h3>Contact Us</h3>
-            <ul>
-              <li>1-800-BUS-BOOK</li>
-              <li>support@busbooker.com</li>
+            <ul className="contact-icons">
+              <li>
+                <FaPhoneAlt /> <span>1-800-BUS-BOOK</span>
+              </li>
+              <li>
+                <FaEnvelope /> <span>support@busbooker.com</span>
+              </li>
             </ul>
           </div>
         </div>
