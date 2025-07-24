@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../utils/api";
+import "./Register.css"; // Assuming you have a CSS file for styling
 
 const Register = () => {
   const [formData, setFormData] = useState({
