@@ -1,3 +1,5 @@
+import "../pages/About.css"; // Assuming you have a CSS file for styling
+
 const About = () => {
   return (
     <div className="about-page">
