@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./Hero.css"; // Assuming you have a CSS file for styling
 
 const Hero = () => {
   return (

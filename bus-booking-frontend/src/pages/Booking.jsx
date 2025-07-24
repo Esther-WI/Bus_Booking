@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
+import "./Booking.css"; // Assuming you have a CSS file for styling
 
 const Booking = () => {
   const { id } = useParams();

@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import React from "react";
+import "../components/Routecard.css"; // Assuming you have a CSS file for styling
 
 const RouteCard = ({ route }) => {
   return (

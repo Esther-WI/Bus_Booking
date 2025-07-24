@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import RouteCard from "../components/RouteCard";
 import SpecialOfferCard from "../components/SpecialOfferCard";
 import api from "../utils/api";
+import "./Search.css"; // Assuming you have a CSS file for styling
 
 const Search = () => {
   const [routes, setRoutes] = useState([]);
