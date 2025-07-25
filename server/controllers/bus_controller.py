@@ -36,7 +36,7 @@ def my_buses():
     return jsonify([b.to_dict() for b in buses])
 
 # Reviews
-@bus_bp.route("/<int:bus_id>/reviews", methods = "POST")
+@bus_bp.route("/<int:bus_id>/reviews", methods = ["POST"])
 @jwt_required()
 @role_required("Customer")
 def post_bus_review(bus_id):
@@ -76,7 +76,7 @@ def post_bus_review(bus_id):
     except Exception as e:
         return {"error": str(e)}, 500
 
-@bus_bp.route("/<int:bus_id>/reviews", methods = "GET")
+@bus_bp.route("/<int:bus_id>/reviews", methods = ["GET"])
 @jwt_required()
 @role_required("Customer","Driver","Admin")
 def get_bus_review(bus_id):
