@@ -110,6 +110,29 @@ def search_buses():
     buses = query.all()
     return jsonify([b.to_dict() for b in buses]), 200
 
+@bus_bp.route("/<int:bus_id>", methods=["PATCH"])
+@jwt_required()
+@role_required("Admin")
+def update_bus(bus_id):
+    bus = Bus.query.get_or_404(bus_id)
+    data = request.get_json()
+    
+    try:
+        # Update only allowed fields
+        allowed_fields = ['registration_number', 'model', 'capacity', 'status', 'driver_id']
+        for field in allowed_fields:
+            if field in data:
+                setattr(bus, field, data[field])
+        
+        db.session.commit()
+        return jsonify(bus.to_dict()), 200
+    except ValueError as e:
+        db.session.rollback()
+        return {"error": str(e)}, 400
+    except Exception as e:
+        db.session.rollback()
+        return {"error": "Failed to update bus"}, 500
+
 
 
 

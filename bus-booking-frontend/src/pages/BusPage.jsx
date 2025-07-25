@@ -75,7 +75,7 @@ const BusesPage = () => {
               
               {userRole === "Admin" && (
                 <div className="bus-actions">
-                  <button onClick={() => navigate(`/buses/edit/${bus.id}`)}>
+                  <button onClick={() => navigate(`api/buses/${bus.id}`)}>
                     Edit
                   </button>
                 </div>
