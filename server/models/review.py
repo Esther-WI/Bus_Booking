@@ -2,13 +2,14 @@
 
 from server.extensions import db
 from datetime import datetime
+from sqlalchemy.orm import validates
 
 class Review(db.Model):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
-    comment = db.Column(db.Integer, nullable=False)
+    comment = db.Column(db.String, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -21,9 +22,22 @@ class Review(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+            "text": self.text,
             "bus_id": self.bus_id,
             "user_id": self.user_id,
             "rating": self.rating,
             "comment": self.comment,
             "date": self.created_at.isoformat()
         }
+    
+    @validates('text')
+    def validate_text(self, key, text):
+        if not text or len(text.strip()) < 10:
+            raise ValueError("Review text must be at least 10 characters")
+        return text
+
+    @validates('rating')
+    def validate_rating(self, key, rating):
+        if not 1 <= rating <= 5:
+            raise ValueError("Rating must be between 1 and 5")
+        return rating

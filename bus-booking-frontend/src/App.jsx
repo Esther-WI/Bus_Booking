@@ -14,6 +14,7 @@ import About from "./pages/About";
 import Feedback from "./pages/Feedback";
 import NotFound from "./pages/NotFound";
 import "./index.css";
+import BookingsList from "./pages/BookingsList";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
               <Route path="/driver-dashboard" element={<DriverDashboard />} />
               <Route path="/admin-dashboard" element={<AdminDashboard />} />
               <Route path="/about" element={<About />} />
+              <Route path="/bookings" element={<BookingsList />}/>
               <Route path="/feedback" element={<Feedback />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

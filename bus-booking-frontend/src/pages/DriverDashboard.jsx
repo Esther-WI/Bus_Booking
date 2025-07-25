@@ -15,8 +15,8 @@ const DriverDashboard = () => {
     const fetchDriverData = async () => {
       try {
         const [busResponse, schedulesResponse] = await Promise.all([
-          api.get(`/drivers/${user.id}/bus`),
-          api.get(`/drivers/${user.id}/schedules`),
+          api.get(`api/buses/my/`),
+          api.get(`/api/schedules/driver/my`),
         ]);
 
         setBus(busResponse.data);
@@ -33,10 +33,24 @@ const DriverDashboard = () => {
 
   const handleBusSubmit = async (busData) => {
     try {
-      const response = await api.put(`/buses/${bus.id}`, busData);
+      const response = await api.patch(`api/buses/${bus.id}`, busData);
       setBus(response.data);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to update bus");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (user?.Role !== "Admin") {
+      setError("Only admins can delete schedules.");
+      return;
+    }
+
+    try {
+      await api.delete(`api/schedules/${id}`);
+      setSchedules(schedules.filter((s) => s.id !== id));
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to delete schedule");
     }
   };
 
@@ -60,20 +74,11 @@ const DriverDashboard = () => {
         {schedules.length > 0 ? (
           <ScheduleList
             schedules={schedules}
-            onDelete={async (id) => {
-              try {
-                await api.delete(`/schedules/${id}`);
-                setSchedules(schedules.filter((s) => s.id !== id));
-              } catch (err) {
-                setError(
-                  err.response?.data?.message || "Failed to delete schedule"
-                );
-              }
-            }}
+            onDelete={handleDelete}
             onEdit={(schedule) => {
-              // Implement edit functionality
               console.log("Edit schedule", schedule);
             }}
+            userRole={user?.Role}
           />
         ) : (
           <div className="no-schedules">No schedules assigned to you</div>

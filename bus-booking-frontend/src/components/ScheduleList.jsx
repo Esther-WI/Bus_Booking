@@ -1,4 +1,4 @@
-const ScheduleList = ({ schedules, onDelete, onEdit }) => {
+const ScheduleList = ({ schedules, onDelete, onEdit, userRole }) => {
   return (
     <div className="schedule-list">
       <h3>Bus Schedules</h3>
@@ -20,12 +20,14 @@ const ScheduleList = ({ schedules, onDelete, onEdit }) => {
                 {route.origin} - {route.destination}
               </td>
               <td>{schedule.departure_time}</td>
-              <td>{schedule.arriva_time}</td>
+              <td>{schedule.arrival_time}</td>
               <td>{schedule.driver_id}</td>
               <td>{schedule.registration_number}</td>
               <td>
                 <button onClick={() => onEdit(schedule)}>Edit</button>
-                <button onClick={() => onDelete(schedule.id)}>Delete</button>
+                {userRole === "Admin" && (
+                  <button onClick={() => onDelete(schedule.id)}>Delete</button>
+                )}
               </td>
             </tr>
           ))}

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from server.models import Schedule, Route
+from server.models import Schedule, Route, Bus
 from server.extensions import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from server.utils.auth import role_required
@@ -43,7 +43,6 @@ def upcoming_schedules(route_id):
 @jwt_required()
 def driver_schedules():
     user_id = get_jwt_identity()
-    from models import Bus
     bus_ids = [b.id for b in Bus.query.filter_by(driver_id=user_id).all()]
     schedules = Schedule.query.filter(Schedule.bus_id.in_(bus_ids)).all()
     return jsonify([s.to_dict() for s in schedules])

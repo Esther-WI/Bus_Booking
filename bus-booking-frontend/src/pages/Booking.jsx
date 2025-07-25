@@ -47,7 +47,7 @@ const Booking = () => {
         seats: Number(formData.seats),
         paymentMethod: formData.paymentMethod,
       });
-      navigate("/");
+      navigate("/bookings");
     } catch (err) {
       setError(err.response?.data?.message || "Booking failed");
     }

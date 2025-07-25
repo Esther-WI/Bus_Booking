@@ -54,3 +54,4 @@ def get_me():
 def get_role():
     return jsonify({"role": current_user().role}), 200
 
+

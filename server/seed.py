@@ -33,8 +33,8 @@ with app.app_context():
 
     print("✅ Seeding buses...")
     buses = [
-        Bus(registration_number="KDA123A", model="Scania", driver_id=users[1].id),
-        Bus(registration_number="KDB456B", model="Isuzu", driver_id=users[2].id)
+        Bus(registration_number="KDA123A", capacity=40, model="Scania", driver_id=users[1].id),
+        Bus(registration_number="KDB456B", capacity=45, model="Isuzu", driver_id=users[2].id)
     ]
     db.session.add_all(buses)
     db.session.commit()
@@ -77,7 +77,8 @@ with app.app_context():
 
     db.session.add_all(bookings)
     db.session.commit()
-    print("✅ Seeding offers!")
+
+    print("✅ Seeding offers...")
     offers = [
         Offer(title="Summer Sale", description="Get 20% off all routes in July!", discount="20% OFF", terms="Valid till July 31"),
         Offer(title="First Ride Bonus", description="Enjoy 15% off your first booking.", discount="15% OFF", terms="New users only")

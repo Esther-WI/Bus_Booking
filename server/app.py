@@ -23,6 +23,7 @@ app.register_blueprint(schedule_bp, url_prefix="/api/schedules")
 app.register_blueprint(booking_bp, url_prefix="/api/bookings")
 app.register_blueprint(route_bp, url_prefix="/api/routes")
 app.register_blueprint(offer_bp, url_prefix="/api/offers")
+app.register_blueprint(admin_bp, url_prefix="/api/admin")
 
 # Default route
 @app.route("/")

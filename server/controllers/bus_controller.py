@@ -38,7 +38,7 @@ def my_buses():
 # Reviews
 @bus_bp.route("/<int:bus_id>/reviews", methods = ["POST"])
 @jwt_required()
-@role_required("Customer")
+@role_required("Customer","Admin")
 def post_bus_review(bus_id):
     data = request.get_json()
     user = current_user()
@@ -59,13 +59,18 @@ def post_bus_review(bus_id):
         existing = Review.query.filter_by(user_id=user.id, bus_id=bus_id).first()
         if existing:
             return {"error": "You have already reviewed this bus."}, 400
+        
+        # Validate required fields
+        required_fields = ['text', 'rating', 'user_id']
+        if not all(field in data for field in required_fields):
+            return {'error': 'Missing required fields'}, 400
 
         review = Review(
-            user_id=user.id,
-            bus_id=bus_id,
-            rating=rating,
-            comment=comment,
-            created_at=datetime.utcnow()
+            text=data['text'],
+            user_id=data['user_id'],
+            bus_id=data['bus_id'],
+            rating=data['rating'],
+            comment=data['comment'],
         )
 
         db.session.add(review)
@@ -76,7 +81,7 @@ def post_bus_review(bus_id):
     except Exception as e:
         return {"error": str(e)}, 500
 
-@bus_bp.route("/<int:bus_id>/reviews", methods = ["GET"])
+@bus_bp.route("/reviews", methods = ["GET"])
 @jwt_required()
 @role_required("Customer","Driver","Admin")
 def get_bus_review(bus_id):

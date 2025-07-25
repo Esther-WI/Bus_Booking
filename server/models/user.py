@@ -11,7 +11,7 @@ class User(db.Model):
     _password_hash = db.Column(db.String)
     email = db.Column(db.String(100), unique=True, nullable=False)
     phone_number = db.Column(db.String(10))
-    Role = db.Column(db.String(), nullable=False)
+    Role = db.Column(db.String(), default="Customer", nullable=False)
 
     bookings = db.relationship('Booking', back_populates='user', lazy=True, foreign_keys='Booking.customer_id')
     buses = db.relationship('Bus', back_populates='driver', lazy=True, foreign_keys='Bus.driver_id')
