@@ -62,5 +62,14 @@ def search_schedules():
     return jsonify([s.to_dict() for s in schedules])
 
 
+@schedule_bp.route("/<int:id>/route", methods=["GET"])
+def get_schedule_with_route(id):
+    schedule = Schedule.query.get_or_404(id)
+    return jsonify({
+        **schedule.to_dict(),
+        "route": schedule.route.to_dict()  # Frontend expects combined data
+    })
+
+
 
 

@@ -1,7 +1,7 @@
 # seed.py
 from server.app import app
 from server.extensions import db
-from server.models import User, Route, Bus, Schedule, Booking
+from server.models import User, Route, Bus, Schedule, Booking, Offer
 from server.app import app
 from datetime import datetime, timedelta
 import random
@@ -77,5 +77,14 @@ with app.app_context():
 
     db.session.add_all(bookings)
     db.session.commit()
+    print("✅ Seeding offers!")
+    offers = [
+        Offer(title="Summer Sale", description="Get 20% off all routes in July!", discount="20% OFF", terms="Valid till July 31"),
+        Offer(title="First Ride Bonus", description="Enjoy 15% off your first booking.", discount="15% OFF", terms="New users only")
+    ]
+
+    db.session.add_all(offers)
+    db.session.commit()
+
 
 print("✅ Seeding complete!")

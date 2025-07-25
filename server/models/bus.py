@@ -8,18 +8,21 @@ class Bus(db.Model):
     driver_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     registration_number = db.Column(db.String(10), unique=True, nullable=False)
     model = db.Column(db.String(100), nullable=False)
+    capacity = db.Column(db.Integer, nullable=False)
     status = db.Column(db.String(20), default='Available')
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
     schedules = db.relationship('Schedule', back_populates='bus', lazy=True, foreign_keys='Schedule.bus_id')
     driver = db.relationship('User', back_populates='buses', foreign_keys = [driver_id])
+    reviews = db.relationship('Review', back_populates='bus', cascade='all, delete')
 
-    def __init__(self, driver_id, registration_number, model, status='Available', created_at=None):
+    def __init__(self, driver_id, registration_number, model, status='Available', created_at=None, capacity=None):
         self.driver_id = driver_id
         self.registration_number = registration_number
         self.model = model
         self.status = status
         self.created_at = created_at
+        self.capacity = capacity
 
 
     @validates('registration_number')
@@ -39,6 +42,7 @@ class Bus(db.Model):
             "id": self.id,
             "model": self.model,
             "registration_number": self.registration_number,
+            "capacity": self.capacity,
             "status": self.status,
             "driver_id": self.basic_info if self.driver_id else None,
             "schedules": [s.basic_info for s in self.schedules]

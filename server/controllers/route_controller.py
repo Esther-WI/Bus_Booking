@@ -1,9 +1,10 @@
 from flask import Blueprint, request, jsonify
 from server.models import Route
 from server.extensions import db
-route_bp = Blueprint("routes", __name__, url_prefix="/api/routes")
 from server.utils.auth import role_required
 from flask_jwt_extended import jwt_required
+
+route_bp = Blueprint("routes", __name__, url_prefix="/api/routes")
 
 @route_bp.route("/", methods=["GET"])
 def get_routes():
@@ -35,4 +36,13 @@ def search_routes():
         Route.destination.ilike(f"%{destination}%")
     ).all()
     return jsonify([r.to_dict() for r in routes])
+
+# Popular routes
+@route_bp.route("/popular", methods=["GET"])
+@jwt_required()
+@role_required("Admin","Customer","Driver")
+def popular_routes():
+    popular = Route.query.order_by(Route.bookings_count.desc()).limit(5).all()
+    return jsonify([r.to_dict() for r in popular])
+
 

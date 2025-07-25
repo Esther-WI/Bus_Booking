@@ -5,6 +5,8 @@ import api from "../utils/api";
 import "./Search.css"; // Assuming you have a CSS file for styling
 
 const Search = () => {
+  const [busSearchQuery, setBusSearchQuery] = useState("");
+  const [busResults, setBusResults] = useState([]);
   const [routes, setRoutes] = useState([]);
   const [popularRoutes, setPopularRoutes] = useState([]);
   const [specialOffers, setSpecialOffers] = useState([]);
@@ -62,6 +64,17 @@ const Search = () => {
     }
   };
 
+  const fetchBusResults = async (query) => {
+    try {
+      const response = await api.get("/buses/search", {
+        params: { model: query, registration_number: query },
+      });
+      setBusResults(response.data);
+    } catch (err) {
+      console.error("Bus search failed:", err);
+    }
+  };
+
   const handleSearchChange = (e) => {
     const { name, value } = e.target;
     setSearchParams((prev) => ({ ...prev, [name]: value }));
@@ -111,6 +124,28 @@ const Search = () => {
             <button type="submit" className="search-button">
               Search Buses
             </button>
+            <div className="form-row">
+              <input
+                type="text"
+                placeholder="Search by model or reg number"
+                onChange={(e) => setBusSearchQuery(e.target.value)}
+              />
+                {busResults.length > 0 && (
+                    <div className="bus-search-results">
+                      <h3>Bus Results</h3>
+                      <ul>
+                        {busResults.map((bus) => (
+                          <li key={bus.id}>
+                            {bus.registration_number} - {bus.model} (Capacity: {bus.capacity})
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+              <button onClick={() => fetchBusResults(busSearchQuery)}>
+                Search Buses
+              </button>
+            </div>
           </div>
         </form>
       </div>

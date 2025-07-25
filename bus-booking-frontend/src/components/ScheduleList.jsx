@@ -17,12 +17,12 @@ const ScheduleList = ({ schedules, onDelete, onEdit }) => {
           {schedules.map((schedule) => (
             <tr key={schedule.id}>
               <td>
-                {schedule.from} - {schedule.to}
+                {route.origin} - {route.destination}
               </td>
-              <td>{schedule.departureTime}</td>
-              <td>{schedule.arrivalTime}</td>
-              <td>{schedule.driverName}</td>
-              <td>{schedule.busNumber}</td>
+              <td>{schedule.departure_time}</td>
+              <td>{schedule.arriva_time}</td>
+              <td>{schedule.driver_id}</td>
+              <td>{schedule.registration_number}</td>
               <td>
                 <button onClick={() => onEdit(schedule)}>Edit</button>
                 <button onClick={() => onDelete(schedule.id)}>Delete</button>

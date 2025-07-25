@@ -129,7 +129,7 @@ const AdminDashboard = () => {
               {buses.map((bus) => (
                 <div key={bus.id} className="bus-item">
                   <p>
-                    Bus #{bus.busNumber} - {bus.model} (Capacity: {bus.capacity}
+                    Bus #{bus.registration_number} - {bus.model} (Capacity: {bus.capacity}
                     )
                   </p>
                   <button

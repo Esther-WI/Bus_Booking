@@ -48,3 +48,9 @@ def update_profile():
 def get_me():
     return jsonify(current_user().to_dict())
 
+# To get role yeee
+@auth_bp.route('/role', methods=['GET'])
+@jwt_required()
+def get_role():
+    return jsonify({"role": current_user().role}), 200
+

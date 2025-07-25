@@ -15,6 +15,7 @@ class User(db.Model):
 
     bookings = db.relationship('Booking', back_populates='user', lazy=True, foreign_keys='Booking.customer_id')
     buses = db.relationship('Bus', back_populates='driver', lazy=True, foreign_keys='Bus.driver_id')
+    reviews = db.relationship('Review', back_populates='user', cascade='all, delete')
 
     DEFAULT_ROLES = {"Customer", "Driver", "Admin"}
 

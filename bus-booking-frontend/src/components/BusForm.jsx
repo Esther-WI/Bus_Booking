@@ -2,10 +2,11 @@ import { useState } from "react";
 
 const BusForm = ({ onSubmit, initialData = {} }) => {
   const [formData, setFormData] = useState({
-    busNumber: initialData.busNumber || "",
-    capacity: initialData.capacity || "",
-    model: initialData.model || "",
-    licensePlate: initialData.licensePlate || "",
+      registration_number: initialData.registration_number || "",
+      capacity: initialData.capacity || "", // this isn't used in backend, you might remove it
+      model: initialData.model || "",
+      status: initialData.status || "Available", // optional field
+      driver_id: initialData.driver_id || "", // required by backend
   });
 
   const handleChange = (e) => {
@@ -24,8 +25,8 @@ const BusForm = ({ onSubmit, initialData = {} }) => {
         <label>Bus Number</label>
         <input
           type="text"
-          name="busNumber"
-          value={formData.busNumber}
+          name="redistration_number"
+          value={formData.registration_number}
           onChange={handleChange}
           required
         />
@@ -51,11 +52,11 @@ const BusForm = ({ onSubmit, initialData = {} }) => {
         />
       </div>
       <div className="form-group">
-        <label>License Plate</label>
+        <label>Driver ID</label>
         <input
           type="text"
           name="licensePlate"
-          value={formData.licensePlate}
+          value={formData.driver_id}
           onChange={handleChange}
           required
         />

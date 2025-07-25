@@ -12,12 +12,13 @@ const Booking = () => {
   const [formData, setFormData] = useState({
     seats: 1,
     paymentMethod: "credit",
+    schedule_id: null,
   });
 
   useEffect(() => {
     const fetchRoute = async () => {
       try {
-        const response = await api.get(`/routes/${id}`);
+        const response = await api.get(`/schedules/${id}`);
         setRoute(response.data);
       } catch (err) {
         setError(
@@ -42,11 +43,11 @@ const Booking = () => {
 
     try {
       await api.post("/bookings", {
-        routeId: id,
-        seats: formData.seats,
+        schedule_id: id,
+        seats: Number(formData.seats),
         paymentMethod: formData.paymentMethod,
       });
-      navigate("/"); // Redirect to home after successful booking
+      navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Booking failed");
     }
@@ -61,12 +62,12 @@ const Booking = () => {
       <h2>Book Your Trip</h2>
       <div className="booking-details">
         <h3>
-          {route.from} to {route.to}
+          {route.origin} to {route.destination}
         </h3>
-        <p>Departure: {route.departureTime}</p>
-        <p>Arrival: {route.arrivalTime}</p>
-        <p>Price per seat: ${route.price}</p>
-        <p>Available seats: {route.availableSeats}</p>
+        <p>Departure: {schedule.departure_time}</p>
+        <p>Arrival: {schedule.arrival_time}</p>
+        <p>Price per seat: ${schedule.price_per_seat}</p>
+        <p>Available seats: {schedule.available_seats}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="booking-form">
@@ -76,7 +77,7 @@ const Booking = () => {
             type="number"
             name="seats"
             min="1"
-            max={route.availableSeats}
+            max={schedule.available_seats}
             value={formData.seats}
             onChange={handleChange}
             required
@@ -96,7 +97,7 @@ const Booking = () => {
           </select>
         </div>
         <div className="price-summary">
-          <h4>Total: ${route.price * formData.seats}</h4>
+          <h4>Total: ${schedule.price_per_seat * formData.seats}</h4>
         </div>
         <button type="submit" className="confirm-button">
           Confirm Booking

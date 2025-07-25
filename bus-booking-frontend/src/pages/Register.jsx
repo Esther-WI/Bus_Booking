@@ -11,7 +11,7 @@ const Register = () => {
     phone: "",
     password: "",
     confirmPassword: "",
-    role: "customer",
+    role: [ "customer", "Driver" ]
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -39,7 +39,7 @@ const Register = () => {
 
     try {
       await api.post("/auth/register", {
-        name: `${formData.firstName} ${formData.lastName}`,
+        username: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         phone: formData.phone,
         password: formData.password,
@@ -51,6 +51,16 @@ const Register = () => {
       setError(err.response?.data?.message || "Registration failed");
     }
   };
+
+  const toggleRole = (selectedRole) => {
+    setFormData((prev) => {
+      const roles = prev.role.includes(selectedRole)
+        ? prev.role.filter((r) => r !== selectedRole)
+        : [...prev.role, selectedRole];
+      return { ...prev, roles };
+    });
+  };
+  
 
   return (
     <div className="auth-page">

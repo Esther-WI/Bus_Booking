@@ -9,6 +9,7 @@ class Route(db.Model):
     destination = db.Column(db.String(50), nullable=False)
     distance = db.Column(db.Numeric(8, 2), nullable=False)
     estimated_duration = db.Column(db.Integer, nullable=False)
+    bookings_count = db.Column(db.Integer, default=0)  # Track popularity
 
     schedules = db.relationship('Schedule', back_populates='route', lazy=True, foreign_keys='Schedule.route_id')
 
