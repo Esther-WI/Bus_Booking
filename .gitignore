@@ -1,70 +1,51 @@
-# System and IDE files
+# --- Common Files ---
 .DS_Store
-.vscode
-
-# Python specific
-__pycache__/
-*.py[cod]
-*.pyc
-*.pyd
-*.pyo
-*.so
-.Python
-.env
-.venv/
-venv/
-ENV/
-instance/
-
-# Configuration files
-/config.py          
-/config/master.key
-/extensinos.py
-/app.py
-/seed.py
-
-# Database files
-*.db
-*.sqlite3
-*.sqlite3-*
-/db/*.sqlite3
-/db/*.sqlite3-*
-instance/
-
-# Logs and temp files
 *.log
-*.pid
-*.seed
-.byebug_history
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
-
-# Bundler and npm
-/.bundle
-node_modules/
-jspm_packages/
-.npm
-package-lock.json
-
-# Build and test artifacts
-build/
-dist/
-*.egg-info/
-.pytest_cache/
-.results.json
-
-# Editor files
 *.swp
 *.swo
+*.bak
 *~
+Thumbs.db
 
-# Storage
-/storage/*
-!/storage/.keep
+# --- Environment Files ---
+.env
+.env.local
+.env*.local
+.secrets
 
-# Other
-lib-cov/
-build/Release/
-.node_repl_history
+# --- Dependency Directories ---
+node_modules/
+bower_components/
+jspm_packages/
+.pnpm-store/
+
+# --- Build/Artifact Directories ---
+dist/
+build/
+out/
+.cache/
+.temp/
+
+# --- IDE/Editor ---
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# --- OS/Shell ---
+ehthumbs.db
+[Tt]humbs.db
+*.stackdump
+
+# --- Testing/Coverage ---
+coverage/
+.nyc_output/
+*.lcov
+
+# --- Package Manager ---
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
