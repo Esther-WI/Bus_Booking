@@ -25,7 +25,7 @@ const CreateOfferForm = () => {
     setError(null);
 
     try {
-      const res = await api.post("/offers/", formData);
+      const res = await api.post("http://127.0.0.1:5000/offers/", formData);
       setMessage("Offer created successfully!");
       setFormData({
         title: "",

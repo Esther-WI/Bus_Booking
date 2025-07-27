@@ -31,7 +31,10 @@ const Search = () => {
     setLoading((prev) => ({ ...prev, main: true }));
     setError("");
     try {
-      const response = await api.get("/routes", { params });
+      const response = await api.get("http://127.0.0.1:5000/api/routes/", { params:{
+        ...params,
+        include_schedules: true  // Add this parameter
+      } });
       setRoutes(response.data);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch routes");
@@ -43,7 +46,7 @@ const Search = () => {
   const fetchPopularRoutes = async () => {
     setLoading((prev) => ({ ...prev, popular: true }));
     try {
-      const response = await api.get("/routes/popular");
+      const response = await api.get("http://127.0.0.1:5000/api/routes/popular", { params: { include_schedules: true } });
       setPopularRoutes(response.data);
     } catch (err) {
       console.error("Failed to fetch popular routes:", err);
@@ -55,7 +58,7 @@ const Search = () => {
   const fetchSpecialOffers = async () => {
     setLoading((prev) => ({ ...prev, offers: true }));
     try {
-      const response = await api.get("/offers");
+      const response = await api.get("http://127.0.0.1:5000/api/offers");
       setSpecialOffers(response.data);
     } catch (err) {
       console.error("Failed to fetch special offers:", err);
@@ -66,7 +69,7 @@ const Search = () => {
 
   const fetchBusResults = async (query) => {
     try {
-      const response = await api.get("/buses/search", {
+      const response = await api.get("http://127.0.0.1:5000/api/buses/search", {
         params: { model: query, registration_number: query },
       });
       setBusResults(response.data);

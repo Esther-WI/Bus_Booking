@@ -15,8 +15,8 @@ const DriverDashboard = () => {
     const fetchDriverData = async () => {
       try {
         const [busResponse, schedulesResponse] = await Promise.all([
-          api.get(`api/buses/my/`),
-          api.get(`/api/schedules/driver/my`),
+          api.get(`http://127.0.0.1:5000/api/buses/my/`),
+          api.get(`http://127.0.0.1:5000/api/schedules/driver/my`),
         ]);
 
         setBus(busResponse.data);
@@ -33,7 +33,7 @@ const DriverDashboard = () => {
 
   const handleBusSubmit = async (busData) => {
     try {
-      const response = await api.patch(`api/buses/${bus.id}`, busData);
+      const response = await api.patch(`http://127.0.0.1:5000/api/buses/${bus.id}`, busData);
       setBus(response.data);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to update bus");
@@ -47,7 +47,7 @@ const DriverDashboard = () => {
     }
 
     try {
-      await api.delete(`api/schedules/${id}`);
+      await api.delete(`http://127.0.0.1:5000/api/schedules/${id}`);
       setSchedules(schedules.filter((s) => s.id !== id));
     } catch (err) {
       setError(err.response?.data?.message || "Failed to delete schedule");

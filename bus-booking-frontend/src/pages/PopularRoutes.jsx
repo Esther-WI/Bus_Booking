@@ -21,11 +21,11 @@ const PopularRoutes = () => {
     const fetchData = async () => {
       try {
         // Check user role
-        const roleResponse = await api.get("/auth/role");
+        const roleResponse = await api.get("http://127.0.0.1:5000/api/auth/role");
         setUserRole(roleResponse.data.role);
         
         // Fetch popular routes
-        const routesResponse = await api.get("/routes/popular");
+        const routesResponse = await api.get("http://127.0.0.1:5000/api/routes/popular");
         setRoutes(routesResponse.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load data");
@@ -55,7 +55,7 @@ const PopularRoutes = () => {
     setError("");
     
     try {
-      const response = await api.post("/routes", newRoute);
+      const response = await api.post("http://127.0.0.1:5000/api/routes", newRoute);
       setRoutes([response.data, ...routes]);
       setShowForm(false);
       setNewRoute({
@@ -139,7 +139,30 @@ const PopularRoutes = () => {
 
       <div className="routes-list">
         {routes.length > 0 ? (
-          routes.map((route) => <RouteCard key={route.id} route={route} />)
+          routes.map((route) => (
+            <div key={route.id} className="route-with-schedules">
+              {/* Route basic info */}
+              <div className="route-summary">
+                <h3>{route.origin} to {route.destination}</h3>
+                <p>Distance: {route.distance} km</p>
+                <p>Duration: {Math.floor(route.estimated_duration/60)}h {route.estimated_duration%60}m</p>
+              </div>
+              
+              {/* Schedules for this route */}
+              {route.schedules && route.schedules.length > 0 && (
+                <div className="schedules-container">
+                  <h4>Available Schedules:</h4>
+                  {route.schedules.map((schedule) => (
+                    <RouteCard 
+                      key={schedule.id}
+                      route={route}
+                      schedule={schedule}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
         ) : (
           !loading && <div className="no-routes">No popular routes found</div>
         )}

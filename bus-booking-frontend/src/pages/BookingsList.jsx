@@ -11,7 +11,7 @@ const BookingsList = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await api.get("/api/bookings/my");
+        const response = await api.get("http://127.0.0.1:5000/api/bookings/my");
         setBookings(response.data);
       } catch (err) {
         setError(err.response?.data?.error || "Failed to fetch bookings");
@@ -25,7 +25,7 @@ const BookingsList = () => {
 
   const handleCancel = async (id) => {
     try {
-      const response = await api.patch(`/api/bookings/${id}/cancel`);
+      const response = await api.patch(`http://127.0.0.1:5000/api/bookings/${id}/cancel`);
       setBookings(bookings.map(b => 
         b.id === id ? { ...b, booking_status: "Cancelled" } : b
       ));
@@ -36,7 +36,7 @@ const BookingsList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await api.delete(`/api/bookings/${id}`);
+      await api.delete(`http://127.0.0.1:5000/api/bookings/${id}`);
       setBookings(bookings.filter(b => b.id !== id));
     } catch (err) {
       setError(err.response?.data?.error || "Failed to delete booking");

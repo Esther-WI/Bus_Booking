@@ -8,10 +8,9 @@ const Register = () => {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phone_number: "",
     password: "",
-    confirmPassword: "",
-    role: [ "customer", "Driver" ]
+    Role: "customer"
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -27,39 +26,51 @@ const Register = () => {
     e.preventDefault();
     setError("");
 
-    if (formData.password !== formData.confirmPassword) {
+    {/*if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
-    }
+    }*/}
+
 
     if (!acceptedTerms) {
       setError("You must accept the terms and conditions");
       return;
     }
 
+    if (!/^\d{10}$/.test(formData.phone_number)) {
+      setError("Phone number must be exactly 10 digits");
+      return;
+    }
+  
+    // Validate password length
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
     try {
-      await api.post("/auth/register", {
+      await api.post("http://127.0.0.1:5000/api/auth/signup", {
         username: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
-        phone: formData.phone,
         password: formData.password,
-        role: formData.role,
+        Role: formData.Role.charAt(0).toUpperCase() + formData.Role.slice(1)
       });
       setSuccess(true);
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
+      console.error("Registration error:", err.response?.data);
       setError(err.response?.data?.message || "Registration failed");
     }
   };
 
-  const toggleRole = (selectedRole) => {
+  /*const toggleRole = (selectedRole) => {
     setFormData((prev) => {
       const roles = prev.role.includes(selectedRole)
         ? prev.role.filter((r) => r !== selectedRole)
         : [...prev.role, selectedRole];
       return { ...prev, roles };
     });
-  };
+  };*/
   
 
   return (
@@ -81,10 +92,10 @@ const Register = () => {
               <button
                 type="button"
                 className={`role-button ${
-                  formData.role === "customer" ? "active" : ""
+                  formData.Role === "customer" ? "active" : ""
                 }`}
                 onClick={() =>
-                  setFormData((prev) => ({ ...prev, role: "customer" }))
+                  setFormData((prev) => ({ ...prev, Role: "customer" }))
                 }
               >
                 Customer
@@ -92,10 +103,10 @@ const Register = () => {
               <button
                 type="button"
                 className={`role-button ${
-                  formData.role === "driver" ? "active" : ""
+                  formData.Role === "driver" ? "active" : ""
                 }`}
                 onClick={() =>
-                  setFormData((prev) => ({ ...prev, role: "driver" }))
+                  setFormData((prev) => ({ ...prev, Role: "driver" }))
                 }
               >
                 Driver
@@ -144,9 +155,9 @@ const Register = () => {
               <label>Phone Number</label>
               <input
                 type="tel"
-                name="phone"
+                name="phone_number"
                 placeholder="+1 (123) 456-7890"
-                value={formData.phone}
+                value={formData.phone_number}
                 onChange={handleChange}
                 required
               />
@@ -164,7 +175,7 @@ const Register = () => {
               />
             </div>
 
-            <div className="form-group">
+            {/*<div className="form-group">
               <label>Confirm Password</label>
               <input
                 type="password"
@@ -174,7 +185,7 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
-            </div>
+            </div>*/}
 
             <div className="terms-agreement">
               <label>
@@ -189,7 +200,7 @@ const Register = () => {
             </div>
 
             <button type="submit" className="auth-button">
-              Create {formData.role === "driver" ? "Driver" : "Customer"}{" "}
+              Create {formData.Role === "driver" ? "Driver" : "Customer"}{" "}
               Account
             </button>
           </form>

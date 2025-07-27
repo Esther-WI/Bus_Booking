@@ -16,7 +16,7 @@ const BusForm = ({ onSubmit, onCancel, initialData = {} }) => {
     const fetchDrivers = async () => {
       try {
         setLoading(true);
-        const response = await api.get("/api/admin/users");
+        const response = await api.get("http://127.0.0.1:5000/api/admin/users");
         setDrivers(response.data);
       } catch (err) {
         console.error("Failed to fetch drivers", err);

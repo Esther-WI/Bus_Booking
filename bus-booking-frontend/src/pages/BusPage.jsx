@@ -15,13 +15,13 @@ const BusesPage = () => {
     const fetchData = async () => {
       try {
         // Check user role
-        const roleResponse = await api.get("/auth/role");
+        const roleResponse = await api.get("http://127.0.0.1:5000/api/auth/role");
         setUserRole(roleResponse.data.role);
         
         // Fetch buses based on role
         const endpoint = roleResponse.data.role === "Admin" 
-          ? "/api/buses" 
-          : "/api/buses/my";
+          ? "http://127.0.0.1:5000/api/buses" 
+          : "http://127.0.0.1:5000/api/buses/my";
         const busesResponse = await api.get(endpoint);
         setBuses(busesResponse.data);
       } catch (err) {
@@ -36,7 +36,7 @@ const BusesPage = () => {
 
   const handleCreateBus = async (busData) => {
     try {
-      const response = await api.post("/api/buses", busData);
+      const response = await api.post("http://127.0.0.1:5000/api/buses", busData);
       setBuses([...buses, response.data]);
       setShowForm(false);
       setError("");
@@ -75,7 +75,7 @@ const BusesPage = () => {
               
               {userRole === "Admin" && (
                 <div className="bus-actions">
-                  <button onClick={() => navigate(`api/buses/${bus.id}`)}>
+                  <button onClick={() => navigate(`http://127.0.0.1:5000/api/buses/${bus.id}`)}>
                     Edit
                   </button>
                 </div>

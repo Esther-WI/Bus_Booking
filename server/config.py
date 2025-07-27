@@ -10,3 +10,6 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'jwt-dev-key')
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=7)
+
+    CORS_SUPPORTS_CREDENTIALS = True
+    CORS_ORIGINS = os.getenv('CORS_ORIGINS', "http://localhost:5173,http://127.0.0.1:5173").split(',')

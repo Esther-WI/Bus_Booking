@@ -18,7 +18,7 @@ const Booking = () => {
   useEffect(() => {
     const fetchRoute = async () => {
       try {
-        const response = await api.get(`/schedules/${id}`);
+        const response = await api.get(`http://127.0.0.1:5000/api/schedules/${id}`);
         setRoute(response.data);
       } catch (err) {
         setError(
@@ -42,7 +42,7 @@ const Booking = () => {
     setError("");
 
     try {
-      await api.post("/bookings", {
+      await api.post("http://127.0.0.1:5000/api/bookings", {
         schedule_id: id,
         seats: Number(formData.seats),
         paymentMethod: formData.paymentMethod,

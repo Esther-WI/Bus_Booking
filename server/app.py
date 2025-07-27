@@ -14,8 +14,12 @@ app.config.from_object(Config)
 db.init_app(app)
 migrate.init_app(app, db)
 jwt.init_app(app)
-CORS(app)
-
+CORS(app,
+     resources={r"/api/*": {"origins": app.config['CORS_ORIGINS'],
+                "methods": ["GET", "POST", "PATCH", "DELETE"]}},
+     supports_credentials=True,
+     expose_headers=['Content-Type', 'Authorization'],
+     allow_headers=['Content-Type', 'Authorization'])
 # Blueprints
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
 app.register_blueprint(bus_bp, url_prefix="/api/buses")

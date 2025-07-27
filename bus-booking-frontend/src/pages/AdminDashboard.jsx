@@ -17,9 +17,9 @@ const AdminDashboard = () => {
       try {
         const [usersResponse, schedulesResponse, busesResponse] =
           await Promise.all([
-            api.get("api/users"),
-            api.get("api/schedules"),
-            api.get("api/buses"),
+            api.get("http://127.0.0.1:5000/api/users"),
+            api.get("http://127.0.0.1:5000/api/schedules"),
+            api.get("http://127.0.0.1:5000/api/buses"),
           ]);
 
         setUsers(usersResponse.data);
@@ -37,7 +37,7 @@ const AdminDashboard = () => {
 
   const handleUserDelete = async (id) => {
     try {
-      await api.delete(`api/admin/users/${id}`);
+      await api.delete(`http://127.0.0.1:5000/api/admin/users/${id}`);
       setUsers(users.filter((u) => u.id !== id));
     } catch (err) {
       setError(err.response?.data?.message || "Failed to delete user");
@@ -46,7 +46,7 @@ const AdminDashboard = () => {
 
   const handleScheduleDelete = async (id) => {
     try {
-      await api.delete(`api/admin/schedules/${id}`);
+      await api.delete(`http://127.0.0.1:5000/api/admin/schedules/${id}`);
       setSchedules(schedules.filter((s) => s.id !== id));
     } catch (err) {
       setError(err.response?.data?.message || "Failed to delete schedule");
@@ -56,8 +56,8 @@ const AdminDashboard = () => {
   const handleBusSubmit = async (busData) => {
     try {
       const response = busData.id
-        ? await api.put(`api/buses/${busData.id}`, busData)
-        : await api.post("api/buses", busData);
+        ? await api.put(`http://127.0.0.1:5000/api/buses/${busData.id}`, busData)
+        : await api.post("http://127.0.0.1:5000/api/buses", busData);
 
       setBuses(
         busData.id

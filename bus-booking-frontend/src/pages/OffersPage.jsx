@@ -8,7 +8,7 @@ const OffersPage = () => {
 
   useEffect(() => {
     const fetchOffers = async () => {
-      const res = await api.get("/offers/");
+      const res = await api.get("http://127.0.0.1:5000/api/offers/");
       setOffers(res.data);
     };
 
