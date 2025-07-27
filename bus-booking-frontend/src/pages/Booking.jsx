@@ -1,35 +1,33 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
-import "./Booking.css"; // Assuming you have a CSS file for styling
+import "./Booking.css";
 
 const Booking = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // This should be the schedule_id
   const navigate = useNavigate();
-  const [route, setRoute] = useState(null);
+  const [scheduleWithRoute, setScheduleWithRoute] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     seats: 1,
     paymentMethod: "credit",
-    schedule_id: null,
   });
 
   useEffect(() => {
-    const fetchRoute = async () => {
+    console.log('Current token:', localStorage.getItem('token'));
+    const fetchScheduleWithRoute = async () => {
       try {
-        const response = await api.get(`http://127.0.0.1:5000/api/schedules/${id}`);
-        setRoute(response.data);
+        const response = await api.get(`/api/schedules/${id}/route`);
+        setScheduleWithRoute(response.data);
       } catch (err) {
-        setError(
-          err.response?.data?.message || "Failed to fetch route details"
-        );
+        setError(err.response?.data?.message || "Failed to fetch schedule details");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchRoute();
+    fetchScheduleWithRoute();
   }, [id]);
 
   const handleChange = (e) => {
@@ -40,34 +38,44 @@ const Booking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
+    
     try {
-      await api.post("http://127.0.0.1:5000/api/bookings", {
-        schedule_id: id,
-        seats: Number(formData.seats),
-        paymentMethod: formData.paymentMethod,
-      });
-      navigate("/bookings");
+      // Create booking for each seat
+      const bookingPromises = [];
+      for (let seatNum = 1; seatNum <= formData.seats; seatNum++) {
+        bookingPromises.push(
+          api.post("/api/bookings/", {
+            schedule_id: Number(id),
+            seat_number: seatNum,
+            booking_status: "Pending",
+            payment_status: "pending"
+          })
+        );
+      }
+  
+      await Promise.all(bookingPromises);
+      navigate("/bookings/my", { state: { success: true } });
     } catch (err) {
-      setError(err.response?.data?.message || "Booking failed");
+      console.error("Booking error:", err);
+      setError(err.response?.data?.error || "Booking failed. Please try again.");
     }
   };
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error-message">{error}</div>;
-  if (!route) return <div className="not-found">Route not found</div>;
+  if (!scheduleWithRoute) return <div className="not-found">Schedule not found</div>;
 
   return (
     <div className="booking-page">
       <h2>Book Your Trip</h2>
       <div className="booking-details">
         <h3>
-          {route.origin} to {route.destination}
+          {scheduleWithRoute.route?.origin} to {scheduleWithRoute.route?.destination}
         </h3>
-        <p>Departure: {schedule.departure_time}</p>
-        <p>Arrival: {schedule.arrival_time}</p>
-        <p>Price per seat: ${schedule.price_per_seat}</p>
-        <p>Available seats: {schedule.available_seats}</p>
+        <p>Departure: {new Date(scheduleWithRoute.departure_time).toLocaleString()}</p>
+        <p>Arrival: {new Date(scheduleWithRoute.arrival_time).toLocaleString()}</p>
+        <p>Price per seat: ${scheduleWithRoute.price_per_seat}</p>
+        <p>Available seats: {scheduleWithRoute.available_seats}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="booking-form">
@@ -77,7 +85,7 @@ const Booking = () => {
             type="number"
             name="seats"
             min="1"
-            max={schedule.available_seats}
+            max={scheduleWithRoute.available_seats}
             value={formData.seats}
             onChange={handleChange}
             required
@@ -97,10 +105,14 @@ const Booking = () => {
           </select>
         </div>
         <div className="price-summary">
-          <h4>Total: ${schedule.price_per_seat * formData.seats}</h4>
+          <h4>Total: ${(scheduleWithRoute.price_per_seat * formData.seats).toFixed(2)}</h4>
         </div>
-        <button type="submit" className="confirm-button">
-          Confirm Booking
+        <button 
+          type="submit" 
+          className="confirm-button"
+          disabled={loading || formData.seats > scheduleWithRoute.available_seats}
+        >
+          {loading ? "Processing..." : "Confirm Booking"}
         </button>
       </form>
     </div>

@@ -24,14 +24,14 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await api.post("http://127.0.0.1:5000/api/auth/login", formData);
+      const response = await api.post("/api/auth/login", formData);
       login(response.data.user, response.data.token, rememberMe);
 
       // Redirect based on role
       if (response.data.user.role === "admin") {
-        navigate("http://127.0.0.1:5000/api/admin-dashboard");
+        navigate("/api/admin-dashboard");
       } else if (response.data.user.role === "driver") {
-        navigate("http://127.0.0.1:5000/api/buses/my");
+        navigate("/api/buses/my");
       } else {
         navigate("/");
       }
@@ -51,7 +51,7 @@ const Login = () => {
             {error && <div className="error-message">{error}</div>}
 
             <div className="form-group">
-              <label>Email Address</label>
+              <label>Username</label>
               <input
                 type="text"
                 name="username"
