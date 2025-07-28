@@ -25,7 +25,6 @@ class Booking(db.Model):
         self.payment_status = payment_status
         self.created_at = created_at
 
-
     @validates('seat_number')
     def validate_seat_number(self, key, seat_number):
         if not isinstance(seat_number, int) or seat_number <= 0:

@@ -1,5 +1,3 @@
-# app.py
-
 from flask import Flask
 from flask_cors import CORS
 from server.extensions import db
@@ -20,6 +18,7 @@ CORS(app,
      supports_credentials=True,
      expose_headers=['Content-Type', 'Authorization'],
      allow_headers=['Content-Type', 'Authorization'])
+
 # Blueprints
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
 app.register_blueprint(bus_bp, url_prefix="/api/buses")
