@@ -6,7 +6,7 @@ import "./Login.css"; // Assuming you have a CSS file for styling
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [rememberMe, setRememberMe] = useState(false);
@@ -24,14 +24,14 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await api.post("/auth/login", formData);
+      const response = await api.post("/api/auth/login", formData);
       login(response.data.user, response.data.token, rememberMe);
 
       // Redirect based on role
       if (response.data.user.role === "admin") {
-        navigate("/admin-dashboard");
+        navigate("/api/admin-dashboard");
       } else if (response.data.user.role === "driver") {
-        navigate("/driver-dashboard");
+        navigate("/api/buses/my");
       } else {
         navigate("/");
       }
@@ -51,12 +51,12 @@ const Login = () => {
             {error && <div className="error-message">{error}</div>}
 
             <div className="form-group">
-              <label>Email Address</label>
+              <label>Username</label>
               <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                value={formData.email}
+                type="text"
+                name="username"
+                placeholder="Enter your username"
+                value={formData.username}
                 onChange={handleChange}
                 required
               />

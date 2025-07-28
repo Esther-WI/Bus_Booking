@@ -5,6 +5,8 @@ import api from "../utils/api";
 import "./Search.css"; // Assuming you have a CSS file for styling
 
 const Search = () => {
+  const [busSearchQuery, setBusSearchQuery] = useState("");
+  const [busResults, setBusResults] = useState([]);
   const [routes, setRoutes] = useState([]);
   const [popularRoutes, setPopularRoutes] = useState([]);
   const [specialOffers, setSpecialOffers] = useState([]);
@@ -29,7 +31,10 @@ const Search = () => {
     setLoading((prev) => ({ ...prev, main: true }));
     setError("");
     try {
-      const response = await api.get("/routes", { params });
+      const response = await api.get("http://127.0.0.1:5000/api/routes/", { params:{
+        ...params,
+        include_schedules: true  // Add this parameter
+      } });
       setRoutes(response.data);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch routes");
@@ -41,7 +46,7 @@ const Search = () => {
   const fetchPopularRoutes = async () => {
     setLoading((prev) => ({ ...prev, popular: true }));
     try {
-      const response = await api.get("/routes/popular");
+      const response = await api.get("http://127.0.0.1:5000/api/routes/popular", { params: { include_schedules: true } });
       setPopularRoutes(response.data);
     } catch (err) {
       console.error("Failed to fetch popular routes:", err);
@@ -53,12 +58,23 @@ const Search = () => {
   const fetchSpecialOffers = async () => {
     setLoading((prev) => ({ ...prev, offers: true }));
     try {
-      const response = await api.get("/offers");
+      const response = await api.get("http://127.0.0.1:5000/api/offers");
       setSpecialOffers(response.data);
     } catch (err) {
       console.error("Failed to fetch special offers:", err);
     } finally {
       setLoading((prev) => ({ ...prev, offers: false }));
+    }
+  };
+
+  const fetchBusResults = async (query) => {
+    try {
+      const response = await api.get("http://127.0.0.1:5000/api/buses/search", {
+        params: { model: query, registration_number: query },
+      });
+      setBusResults(response.data);
+    } catch (err) {
+      console.error("Bus search failed:", err);
     }
   };
 
@@ -111,6 +127,28 @@ const Search = () => {
             <button type="submit" className="search-button">
               Search Buses
             </button>
+            <div className="form-row">
+              <input
+                type="text"
+                placeholder="Search by model or reg number"
+                onChange={(e) => setBusSearchQuery(e.target.value)}
+              />
+                {busResults.length > 0 && (
+                    <div className="bus-search-results">
+                      <h3>Bus Results</h3>
+                      <ul>
+                        {busResults.map((bus) => (
+                          <li key={bus.id}>
+                            {bus.registration_number} - {bus.model} (Capacity: {bus.capacity})
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+              <button onClick={() => fetchBusResults(busSearchQuery)}>
+                Search Buses
+              </button>
+            </div>
           </div>
         </form>
       </div>

@@ -16,7 +16,7 @@ const Feedback = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await api.get("/feedback");
+        const response = await api.get("api/buses/reviews");
         setComments(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to fetch feedback");
@@ -38,7 +38,7 @@ const Feedback = () => {
     setError("");
 
     try {
-      const response = await api.post("/feedback", {
+      const response = await api.post("api/buses/reviews", {
         rating: newComment.rating,
         text: newComment.text,
       });
