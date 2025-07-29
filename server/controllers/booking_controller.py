@@ -43,7 +43,7 @@ def user_bookings():
     bookings = Booking.query.options(
         joinedload(Booking.schedule).joinedload(Schedule.route),
         joinedload(Booking.schedule).joinedload(Schedule.bus)
-    ).filter_by(user_id=user.id).all()
+    ).filter_by(customer_id=user.id).all()
     
     return jsonify([b.to_dict() for b in bookings])
 
