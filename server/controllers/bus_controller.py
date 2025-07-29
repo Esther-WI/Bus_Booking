@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from server.models import Bus,Review,User
 from server.extensions import db
+from sqlalchemy.orm import joinedload
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from server.utils.auth import role_required, current_user
 from datetime import datetime
@@ -29,7 +30,7 @@ def create_bus():
 # Only drivers to view their buses(role based access)
 @bus_bp.route("/my", methods=["GET"])
 @jwt_required()
-@role_required("Driver", "Admin")
+@role_required("Driver", "Admin","Customer")
 def my_buses():
     user = current_user()
     buses = Bus.query.filter_by(driver_id=user.id).all()
@@ -43,34 +44,23 @@ def post_bus_review(bus_id):
     data = request.get_json()
     user = current_user()
 
-    # Ensure bus exists
-    bus = Bus.query.get(bus_id)
-    if not bus:
-        return {"error": "Bus not found"}, 404
+    # Validate required fields
+    if not all(field in data for field in ['rating', 'text']):
+        return {'error': 'Rating and text are required'}, 400
 
     try:
-        rating = data.get("rating")
-        comment = data.get("comment")
-
-        if not rating or not comment:
-            return {"error": "Rating and comment are required."}, 400
-
-        # Prevent duplicate reviews per user per bus (optional)
+        # Check for existing review
         existing = Review.query.filter_by(user_id=user.id, bus_id=bus_id).first()
         if existing:
-            return {"error": "You have already reviewed this bus."}, 400
+            return {"error": "You have already reviewed this bus"}, 400
         
-        # Validate required fields
-        required_fields = ['text', 'rating', 'user_id']
-        if not all(field in data for field in required_fields):
-            return {'error': 'Missing required fields'}, 400
-
+        # Create new review
         review = Review(
             text=data['text'],
-            user_id=data['user_id'],
-            bus_id=data['bus_id'],
+            user_id=user.id,  # Use current user's ID
+            bus_id=bus_id,
             rating=data['rating'],
-            comment=data['comment'],
+            comment=data.get('comment', '')  # Make comment optional
         )
 
         db.session.add(review)
@@ -79,17 +69,17 @@ def post_bus_review(bus_id):
         return jsonify(review.to_dict()), 201
 
     except Exception as e:
+        db.session.rollback()
         return {"error": str(e)}, 500
-
-@bus_bp.route("/reviews", methods = ["GET"])
+@bus_bp.route("/<int:bus_id>/reviews", methods = ["GET"])
 @jwt_required()
-@role_required("Customer","Driver","Admin")
+@role_required("Customer","Admin")
 def get_bus_review(bus_id):
-    bus = Bus.query.get(bus_id)
-    if not bus:
-        return {"error": "Bus not found"}, 404
-
-    reviews = Review.query.filter_by(bus_id=bus_id).all()
+    reviews = Review.query.options(
+        joinedload(Review.user),
+        joinedload(Review.bus)
+    ).filter_by(bus_id=bus_id).order_by(Review.created_at.desc()).all()
+    
     return jsonify([r.to_dict() for r in reviews]), 200
 
 @bus_bp.route("/search", methods=["GET"])

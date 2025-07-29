@@ -1,113 +1,223 @@
-/* Footer.css */
-
+/* Web design footer */
 .main-footer {
-  background-color: #1c1c2b;
+  background: #2c3e50;
   color: #fff;
-  padding: 3rem 2rem 1rem;
-  font-family: "Segoe UI", sans-serif;
+  padding: 3rem 0 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 2rem;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .footer-brand {
-  flex: 1 1 300px;
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 2rem;
 }
 
 .footer-brand h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-brand h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: #3498db;
+  transition: width 0.3s ease;
+}
+
+.footer-brand:hover h2::after {
+  width: 100%;
 }
 
 .footer-brand p {
-  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
   line-height: 1.6;
-}
-
-.social-icons {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1rem;
-}
-
-.social-icons a {
-  color: white;
-  background-color: #333;
-  padding: 0.6rem;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-}
-
-.social-icons a:hover {
-  background-color: #007bff;
+  color: #ecf0f1;
 }
 
 .footer-links {
   display: flex;
-  flex: 2 1 600px;
-  justify-content: space-between;
+  flex: 2;
+  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 2rem;
+}
+
+.links-column {
+  min-width: 150px;
+  margin: 0 1rem 2rem;
 }
 
 .links-column h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.7rem;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.links-column h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: #3498db;
+  transition: width 0.3s ease;
+}
+
+.links-column:hover h3::after {
+  width: 100%;
 }
 
 .links-column ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-.links-column ul li {
-  margin-bottom: 0.5rem;
+.links-column li {
+  margin-bottom: 0.8rem;
 }
 
-.links-column ul li a {
-  color: #ccc;
+.links-column a, .contact-icons span {
+  color: #ecf0f1;
   text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
 }
 
-.links-column ul li a:hover {
+.links-column a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #3498db;
+  transition: width 0.3s ease;
+}
+
+.links-column a:hover {
   color: #fff;
+}
+
+.links-column a:hover::after {
+  width: 100%;
 }
 
 .contact-icons li {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  color: #ccc;
-  font-size: 0.95rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.contact-icons li:hover {
+  transform: translateX(5px);
+}
+
+.contact-icons svg {
+  margin-right: 10px;
+  color: #3498db;
+  transition: all 0.3s ease;
+}
+
+.contact-icons li:hover svg {
+  transform: scale(1.2);
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #34495e;
+  color: #fff;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-icons a:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.social-icons a:nth-child(1):hover {
+  background: #3b5998; /* Facebook */
+}
+
+.social-icons a:nth-child(2):hover {
+  background: #1da1f2; /* Twitter */
+}
+
+.social-icons a:nth-child(3):hover {
+  background: #e4405f; /* Instagram */
 }
 
 .footer-bottom {
-  border-top: 1px solid #333;
-  margin-top: 2rem;
-  padding-top: 1rem;
   text-align: center;
-  font-size: 0.85rem;
-  color: #aaa;
+  padding: 1.5rem;
+  background: #1a252f;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #bdc3c7;
 }
 
+.footer-bottom p {
+  transition: all 0.3s ease;
+}
+
+.footer-bottom:hover p {
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
   }
-
+  
   .footer-links {
-    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .links-column {
+    margin: 0 0 2rem;
+    min-width: 45%;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .links-column {
+    min-width: 100%;
   }
 }

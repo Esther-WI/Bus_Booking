@@ -11,7 +11,8 @@ import PopularRoutes from "./pages/PopularRoutes";
 import DriverDashboard from "./pages/DriverDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
-import Feedback from "./pages/Feedback";
+import BusesPage from "./pages/BusPage";
+import BusReviews from "./pages/BusReviews";
 import NotFound from "./pages/NotFound";
 import "./index.css";
 import BookingsList from "./pages/BookingsList";
@@ -41,8 +42,10 @@ function App() {
               <Route path="/driver-dashboard" element={<DriverDashboard />} />
               <Route path="/admin-dashboard" element={<AdminDashboard />} />
               <Route path="/about" element={<About />} />
-              <Route path="/bookings" element={<BookingsList />}/>
-              <Route path="/feedback" element={<Feedback />} />
+              <Route path="/buses" element={<BusesPage />} />
+              <Route path="/buses/:id" element={<BusesPage />} />
+              <Route path="/bookings/my" element={<BookingsList />} />
+              <Route path="/buses/:id/reviews" element={<BusReviews />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

@@ -47,20 +47,30 @@ class Booking(db.Model):
         return payment_status
     
     def to_dict(self):
+        schedule_data = None
+        if self.schedule:
+            schedule_data = {
+                "id": self.schedule.id,
+                "departure_time": self.schedule.departure_time.isoformat() if self.schedule.departure_time else None,
+                "arrival_time": self.schedule.arrival_time.isoformat() if self.schedule.arrival_time else None,
+                "route": {
+                    "origin": self.schedule.route.origin,
+                    "destination": self.schedule.route.destination,
+                    "distance": float(self.schedule.route.distance),
+                    "estimated_duration": self.schedule.route.estimated_duration
+                } if self.schedule.route else None
+            }
+        
         return {
             "id": self.id,
             "schedule_id": self.schedule_id,
-            # If you need schedule details, serialize them manually:
-            "schedule": {
-                "id": self.schedule.id,
-                "departure_time": self.schedule.departure_time.isoformat(),
-                # Add other Schedule fields as needed
-            } if self.schedule else None,
+            "schedule": schedule_data,
             "customer_id": self.customer_id,
             "seat_number": self.seat_number,
             "booking_status": self.booking_status,
             "payment_status": self.payment_status,
-            "created_at": self.created_at.isoformat() if self.created_at else None
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "reference": self.reference
         }
 
     

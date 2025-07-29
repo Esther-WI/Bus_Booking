@@ -24,12 +24,11 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await api.post("/api/auth/login", formData);
-      login(response.data.user, response.data.token, rememberMe);
-
+      const response = await api.post("http://127.0.0.1:5000/api/auth/login", {...formData,rememberMe});
+      login(response.data.user, response.data.access_token, rememberMe);
       // Redirect based on role
       if (response.data.user.role === "admin") {
-        navigate("/api/admin-dashboard");
+        navigate("/api/admin/dashboard-data");
       } else if (response.data.user.role === "driver") {
         navigate("/api/buses/my");
       } else {
