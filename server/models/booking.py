@@ -64,7 +64,7 @@ class Booking(db.Model):
         return {
             "id": self.id,
             "schedule_id": self.schedule_id,
-            "schedule": schedule_data,
+            "schedule": self.schedule.to_dict() if self.schedule else None,
             "customer_id": self.customer_id,
             "seat_number": self.seat_number,
             "booking_status": self.booking_status,

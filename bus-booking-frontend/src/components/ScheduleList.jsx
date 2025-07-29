@@ -17,7 +17,7 @@ const ScheduleList = ({ schedules, onDelete, onEdit, userRole }) => {
           {schedules.map((schedule) => (
             <tr key={schedule.id}>
               <td>
-                {route.origin} - {route.destination}
+              {schedule.route?.origin} - {schedule.route?.destination}
               </td>
               <td>{schedule.departure_time}</td>
               <td>{schedule.arrival_time}</td>

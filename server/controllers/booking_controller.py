@@ -37,12 +37,13 @@ def create():
 @booking_bp.route("/my", methods=["GET"])
 @jwt_required()
 def user_bookings():
-    user_id = get_jwt_identity()
+    user = current_user()
     
     # Correct query - using filter_by instead of get
     bookings = Booking.query.options(
-        joinedload(Booking.schedule).joinedload(Schedule.route)
-    ).filter_by(customer_id=user_id).order_by(Booking.created_at.desc()).all()
+        joinedload(Booking.schedule).joinedload(Schedule.route),
+        joinedload(Booking.schedule).joinedload(Schedule.bus)
+    ).filter_by(user_id=user.id).all()
     
     return jsonify([b.to_dict() for b in bookings])
 

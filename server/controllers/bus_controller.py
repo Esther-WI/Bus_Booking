@@ -102,10 +102,14 @@ def search_buses():
 
 @bus_bp.route("/<int:bus_id>", methods=["PATCH"])
 @jwt_required()
-@role_required("Admin")
+@role_required("Admin","Driver")
 def update_bus(bus_id):
+    user = current_user()
     bus = Bus.query.get_or_404(bus_id)
     data = request.get_json()
+
+    if user.role == "Driver" and bus.driver_id != user.id:
+        return {"error": "You can only update your own bus"}, 403
     
     try:
         # Update only allowed fields
@@ -113,6 +117,9 @@ def update_bus(bus_id):
         for field in allowed_fields:
             if field in data:
                 setattr(bus, field, data[field])
+
+        if user.role == "Admin" and 'driver_id' in data:
+            bus.driver_id = data['driver_id']
         
         db.session.commit()
         return jsonify(bus.to_dict()), 200

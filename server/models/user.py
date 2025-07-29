@@ -77,6 +77,7 @@ class User(db.Model):
             "id": self.id,
             "username": self.username,
             "bookings": [b.basic_info for b in self.bookings],
+            "email": self.email,
             "role": self.Role
         }
     

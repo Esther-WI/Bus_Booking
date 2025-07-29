@@ -1,4 +1,5 @@
 const UserList = ({ users, onDelete, onEdit }) => {
+  console.log('Users data:', users)
   return (
     <div className="user-list">
       <h3>User Management</h3>
@@ -16,7 +17,7 @@ const UserList = ({ users, onDelete, onEdit }) => {
             <tr key={user.id}>
               <td>{user.username}</td>
               <td>{user.email}</td>
-              <td>{user.Role}</td>
+              <td>{user.role}</td>
               <td>
                 <button onClick={() => onEdit(user)}>Edit</button>
                 <button onClick={() => onDelete(user.id)}>Delete</button>

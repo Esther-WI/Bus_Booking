@@ -15,7 +15,7 @@ const DriverDashboard = () => {
     const fetchDriverData = async () => {
       try {
         const [busResponse, schedulesResponse] = await Promise.all([
-          api.get(`http://127.0.0.1:5000/api/buses/my/`),
+          api.get(`http://127.0.0.1:5000/api/buses/my`),
           api.get(`http://127.0.0.1:5000/api/schedules/driver/my`),
         ]);
 
@@ -33,8 +33,12 @@ const DriverDashboard = () => {
 
   const handleBusSubmit = async (busData) => {
     try {
+      if (!bus || !bus.id) {
+        setError("No bus assigned or bus ID missing");
+        return;
+      }
       const response = await api.patch(`http://127.0.0.1:5000/api/buses/${bus.id}`, busData);
-      setBus(response.data);
+      setBus(response.data[0] || null);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to update bus");
     }
@@ -47,7 +51,7 @@ const DriverDashboard = () => {
     }
 
     try {
-      await api.delete(`http://127.0.0.1:5000/api/schedules/${id}`);
+      await api.delete(`http://127.0.0.1:5000/api/admin/schedules/${id}`);
       setSchedules(schedules.filter((s) => s.id !== id));
     } catch (err) {
       setError(err.response?.data?.message || "Failed to delete schedule");
@@ -63,7 +67,7 @@ const DriverDashboard = () => {
       <div className="driver-section">
         <h3>Your Bus Information</h3>
         {bus ? (
-          <BusForm onSubmit={handleBusSubmit} initialData={bus} />
+          <BusForm onSubmit={handleBusSubmit} initialData={bus} isUpdate={!!bus}/>
         ) : (
           <div className="no-bus">No bus assigned to you</div>
         )}

@@ -40,7 +40,7 @@ function App() {
               <Route path="/booking/:id" element={<Booking />} />
               <Route path="/popular-routes" element={<PopularRoutes />} />
               <Route path="/driver-dashboard" element={<DriverDashboard />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/dashboard-data" element={<AdminDashboard />} />
               <Route path="/about" element={<About />} />
               <Route path="/buses" element={<BusesPage />} />
               <Route path="/buses/:id" element={<BusesPage />} />

@@ -20,11 +20,16 @@ const Navbar = () => {
 
         {isAuthenticated ? (
           <>
-            {user?.role === "admin" && (
+            {user?.role === "Admin" && (
               <Link to="/admin/dashboard-data">Admin Dashboard</Link>
             )}
-            {user?.role === "driver" && (
-              <Link to="/driver-dashboard">Driver Dashboard</Link>
+            {user?.role === "Driver" && (
+              <>
+                <Link to="/driver-dashboard">Driver Dashboard</Link>
+                <Link to="/buses">My buses</Link>
+              </>
+
+              
             )}
             <Link to={"/buses"}>Feedback</Link>
             <button onClick={logout}>Logout</button>
