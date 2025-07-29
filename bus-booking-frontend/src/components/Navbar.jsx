@@ -15,6 +15,7 @@ const Navbar = () => {
         <Link to="/">Home</Link>
         <Link to="/popular-routes">Popular Routes</Link>
         <Link to="/about">About</Link>
+        
 
         {isAuthenticated ? (
           <>
