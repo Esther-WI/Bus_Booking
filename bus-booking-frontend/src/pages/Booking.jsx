@@ -15,10 +15,9 @@ const Booking = () => {
   });
 
   useEffect(() => {
-    console.log('Current token:', localStorage.getItem('token'));
     const fetchScheduleWithRoute = async () => {
       try {
-        const response = await api.get(`/api/schedules/${id}/route`);
+        const response = await api.get(`http://127.0.0.1:5000/api/schedules/${id}/route`);
         setScheduleWithRoute(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to fetch schedule details");
@@ -44,7 +43,7 @@ const Booking = () => {
       const bookingPromises = [];
       for (let seatNum = 1; seatNum <= formData.seats; seatNum++) {
         bookingPromises.push(
-          api.post("/api/bookings/", {
+          api.post("http://127.0.0.1:5000/api/bookings/", {
             schedule_id: Number(id),
             seat_number: seatNum,
             booking_status: "Pending",

@@ -39,7 +39,7 @@ const BookingsList = () => {
       await api.delete(`http://127.0.0.1:5000/api/bookings/${id}`);
       setBookings(bookings.filter(b => b.id !== id));
     } catch (err) {
-      setError(err.response?.data?.error || "Failed to delete booking");
+      setError(err.response?.data?.error);
     }
   };
 
@@ -65,7 +65,11 @@ const BookingsList = () => {
             {bookings.map((booking) => (
               <tr key={booking.id}>
                 <td>
-                  {booking.schedule?.origin} to {booking.schedule?.destination}
+                  {`${booking.schedule?.route?.origin} to ${booking.schedule?.route?.destination}`}
+                  <br />
+                  <small>
+                    {new Date(booking.schedule?.departure_time).toLocaleString()}
+                  </small>
                 </td>
                 <td>{booking.seat_number}</td>
                 <td className={`status-${booking.booking_status.toLowerCase()}`}>

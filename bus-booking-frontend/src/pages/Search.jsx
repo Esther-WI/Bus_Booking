@@ -58,7 +58,7 @@ const Search = () => {
   const fetchSpecialOffers = async () => {
     setLoading((prev) => ({ ...prev, offers: true }));
     try {
-      const response = await api.get("http://127.0.0.1:5000/api/offers");
+      const response = await api.get("http://127.0.0.1:5000/api/offers/");
       setSpecialOffers(response.data);
     } catch (err) {
       console.error("Failed to fetch special offers:", err);
