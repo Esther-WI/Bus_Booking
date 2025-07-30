@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+
 import "./NavBar.css"; // Assuming you have a CSS file for styling
 
 const Navbar = () => {

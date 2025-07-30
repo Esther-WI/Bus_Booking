@@ -18,26 +18,18 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Extensions
+    # Initialize extensions
     db.init_app(app)
     migrate.init_app(app, db)
     jwt.init_app(app)
-    CORS(
-        app,
-        origins=app.config["CORS_ORIGINS"],
-        supports_credentials=app.config["CORS_SUPPORTS_CREDENTIALS"],
-        allow_headers=[
-            "Content-Type", 
-            "Authorization", 
-            "x-access-token",
-            "x-refresh-token"
-        ],
-        expose_headers=app.config["CORS_EXPOSE_HEADERS"],
-        methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-        max_age=app.config["CORS_MAX_AGE"]
-    )
+    CORS(app,
+         resources={r"/api/*": {"origins": app.config['CORS_ORIGINS'],
+                                "methods": ["GET", "POST", "PATCH", "DELETE"]}},
+         supports_credentials=True,
+         expose_headers=['Content-Type', 'Authorization'],
+         allow_headers=['Content-Type', 'Authorization'])
 
-    # Blueprints
+    # Register blueprints
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(bus_bp, url_prefix="/api/buses")
     app.register_blueprint(schedule_bp, url_prefix="/api/schedules")
@@ -56,7 +48,49 @@ def create_app():
     def not_found(e):
         return {"error": "Not found"}, 404
 
-    return app
+
+app = Flask(__name__)
+app.config.from_object(Config)
+
+# Extensions
+db.init_app(app)
+migrate.init_app(app, db)
+jwt.init_app(app)
+CORS(
+    app,
+    origins=app.config["CORS_ORIGINS"],
+    supports_credentials=app.config["CORS_SUPPORTS_CREDENTIALS"],
+    allow_headers=[
+        "Content-Type", 
+        "Authorization", 
+        "x-access-token",
+        "x-refresh-token"
+    ],
+    expose_headers=app.config["CORS_EXPOSE_HEADERS"],
+    methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    max_age=app.config["CORS_MAX_AGE"]
+)
+
+
+# Blueprints
+app.register_blueprint(auth_bp, url_prefix="/api/auth")
+app.register_blueprint(bus_bp, url_prefix="/api/buses")
+app.register_blueprint(schedule_bp, url_prefix="/api/schedules")
+app.register_blueprint(booking_bp, url_prefix="/api/bookings")
+app.register_blueprint(route_bp, url_prefix="/api/routes")
+app.register_blueprint(offer_bp, url_prefix="/api/offers")
+app.register_blueprint(admin_bp, url_prefix="/api/admin")
+
+# Default route
+@app.route("/")
+def home():
+    return {"message": "Bus Booking API running 🎉"}
+
+# Error handler for 404s
+@app.errorhandler(404)
+def not_found(e):
+    return {"error": "Not found"}, 404
+
 
 # Only run this if file is executed directly (not imported)
 if __name__ == "__main__":

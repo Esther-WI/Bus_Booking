@@ -1,8 +1,13 @@
 # seed.py
 from server.app import create_app
 from server.extensions import db
-from server.models import *
-from server.app import app
+
+
+from server.models import User, Route, Bus, Schedule, Booking, Offer
+
+# from server.models import *
+# from server.app import app
+
 from datetime import datetime, timedelta
 import random
 
@@ -127,6 +132,7 @@ with app.app_context():
 
     db.session.add_all(reviews)
     db.session.commit()
+
 
 
 
