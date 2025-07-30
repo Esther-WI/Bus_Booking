@@ -1,7 +1,13 @@
 # seed.py
 from server.app import create_app
 from server.extensions import db
+
+
 from server.models import User, Route, Bus, Schedule, Booking, Offer
+
+# from server.models import *
+# from server.app import app
+
 from datetime import datetime, timedelta
 import random
 
@@ -87,5 +93,47 @@ with app.app_context():
 
     db.session.add_all(offers)
     db.session.commit()
+
+    print("✅ Seeding reviews...")
+    reviews = [
+        Review(
+            text="The bus was very comfortable and arrived on time. Highly recommend!",
+            comment="Great experience",
+            rating=5,
+            user_id=users[3].id,  # rider1
+            bus_id=buses[0].id,    # First bus
+            created_at=datetime(2025, 7, 20, 10, 30)
+        ),
+        Review(
+            text="Decent ride but the AC wasn't working properly.",
+            comment="AC issues",
+            rating=3,
+            user_id=users[4].id,  # rider2
+            bus_id=buses[0].id,   # First bus
+            created_at=datetime(2025, 7, 21, 14, 15)
+        ),
+        Review(
+            text="Excellent service and friendly driver. Will book again!",
+            comment="Perfect trip",
+            rating=5,
+            user_id=users[3].id,  # rider1
+            bus_id=buses[1].id,   # Second bus
+            created_at=datetime(2025, 7, 22, 9, 0)
+        ),
+        Review(
+            text="The bus was clean but the seats were a bit cramped.",
+            comment="Okay experience",
+            rating=4,
+            user_id=users[4].id,  # rider2
+            bus_id=buses[1].id,   # Second bus
+            created_at=datetime(2025, 7, 23, 16, 45)
+        )
+    ]
+
+    db.session.add_all(reviews)
+    db.session.commit()
+
+
+
 
 print("✅ Seeding complete!")

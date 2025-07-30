@@ -19,6 +19,7 @@ class Config:
 
     # CORS (cross-origin requests — important for frontend-backend communication)
     CORS_SUPPORTS_CREDENTIALS = True
+
     CORS_ORIGINS = os.getenv('CORS_ORIGINS', '').split(',')
 
 
@@ -34,3 +35,9 @@ class ProductionConfig(Config):
 
 # You can load this in app.py like:
 # app.config.from_object('config.ProductionConfig')
+    CORS_ORIGINS = os.getenv('CORS_ORIGINS', "http://localhost:5173,http://127.0.0.1:5173").split(',')
+    CORS_SUPPORTS_CREDENTIALS = True
+    CORS_MAX_AGE = 86400
+    CORS_SEND_WILDCARD = False
+    CORS_AUTOMATIC_OPTIONS = True
+    CORS_EXPOSE_HEADERS = ["Content-Type", "Authorization", "x-access-token"]

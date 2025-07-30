@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from server.models import Booking
+from server.models import Booking, Schedule
+from sqlalchemy.orm import joinedload
 from server.extensions import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from server.utils.auth import role_required, current_user
@@ -16,12 +17,12 @@ def index():
 @jwt_required()
 def create():
     data = request.get_json()
-    current_user = get_jwt_identity()
+    user_id = get_jwt_identity()
 
     try:
         new_booking = Booking(
             schedule_id=data["schedule_id"],
-            customer_id=current_user,
+            customer_id=user_id,
             seat_number=data["seat_number"],
             booking_status=data.get("booking_status", "Pending"),
             payment_status=data.get("payment_status", "pending")
@@ -36,8 +37,14 @@ def create():
 @booking_bp.route("/my", methods=["GET"])
 @jwt_required()
 def user_bookings():
-    user_id = get_jwt_identity()
-    bookings = Booking.query.filter_by(customer_id=user_id).order_by(Booking.created_at.desc()).all()
+    user = current_user()
+    
+    # Correct query - using filter_by instead of get
+    bookings = Booking.query.options(
+        joinedload(Booking.schedule).joinedload(Schedule.route),
+        joinedload(Booking.schedule).joinedload(Schedule.bus)
+    ).filter_by(customer_id=user.id).all()
+    
     return jsonify([b.to_dict() for b in bookings])
 
 @booking_bp.route("/<int:id>/cancel", methods=["PATCH"])

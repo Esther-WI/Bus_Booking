@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import api from "../utils/api";
 
 const BusForm = ({ onSubmit, onCancel, initialData = {} }) => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,8 @@ const BusForm = ({ onSubmit, onCancel, initialData = {} }) => {
         setLoading(true);
         const response = await api.get("http://127.0.0.1:5000/api/admin/users");
         setDrivers(response.data);
+        const onlyDrivers = response.data.filter(user => user.role === "Driver");
+      setDrivers(onlyDrivers);
       } catch (err) {
         console.error("Failed to fetch drivers", err);
       } finally {

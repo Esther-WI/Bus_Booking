@@ -31,6 +31,7 @@ def get_dashboard_data():
 def get_all_users():
     try:
         users = User.query.all()
+        print([u.to_dict() for u in users])
         return jsonify([user.to_dict() for user in users]), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
