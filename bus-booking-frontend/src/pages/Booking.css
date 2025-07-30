@@ -1,112 +1,177 @@
-.booking-container {
-  max-width: 1200px;
-  margin: 0 auto;
+/* Booking.css */
+.booking-page {
+  max-width: 800px;
+  margin: 2rem auto;
   padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.booking-header {
-  margin-bottom: 2rem;
+.booking-page h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.5rem;
 }
 
-.booking-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
+.booking-page h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #00bfff);
+  border-radius: 4px;
 }
 
 .booking-details {
-  background-color: white;
-  border-radius: 0.75rem;
-  padding: 2rem;
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid #e9ecef;
 }
 
-.booking-summary {
-  background-color: white;
-  border-radius: 0.75rem;
-  padding: 2rem;
-  position: sticky;
-  top: 2rem;
+.booking-details h3 {
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
 }
 
-.seat-map {
-  margin: 2rem 0;
+.booking-details p {
+  margin: 0.5rem 0;
+  color: #5a6a7b;
+  line-height: 1.5;
 }
 
-.seat-row {
+.booking-details p:last-of-type {
+  margin-bottom: 0;
+}
+
+.booking-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-group {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.seat {
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.form-group label {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.8rem 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.price-summary {
+  background: #f1f9fe;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #d4edff;
+  text-align: center;
+}
+
+.price-summary h4 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #2c3e50;
+}
+
+.confirm-button {
+  padding: 1rem;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-.seat-available {
-  background-color: var(--light-gray);
-  color: var(--dark);
+.confirm-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
 }
 
-.seat-available:hover {
-  background-color: #d1d5db;
-}
-
-.seat-selected {
-  background-color: var(--primary);
-  color: white;
-}
-
-.seat-booked {
-  background-color: var(--gray);
-  color: white;
+.confirm-button:disabled {
+  background: #95a5a6;
   cursor: not-allowed;
 }
 
-.passenger-form {
-  margin-top: 2rem;
+.loading,
+.error-message,
+.not-found {
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 2rem auto;
+  border-radius: 8px;
 }
 
-.payment-methods {
-  margin: 1.5rem 0;
+.loading {
+  color: #3498db;
 }
 
-.payment-method {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  border: 1px solid var(--light-gray);
-  border-radius: 0.5rem;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
+.error-message {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
 }
 
-.payment-method:hover {
-  border-color: var(--primary);
+.not-found {
+  color: #2c3e50;
 }
 
-.payment-method.selected {
-  border-color: var(--primary);
-  background-color: rgba(37, 99, 235, 0.05);
+/* Responsive design */
+@media (max-width: 768px) {
+  .booking-page {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .booking-page h2 {
+    font-size: 1.8rem;
+  }
+
+  .booking-details {
+    padding: 1.2rem;
+  }
 }
 
-.summary-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
-}
+@media (max-width: 576px) {
+  .booking-page {
+    padding: 1rem;
+  }
 
-.summary-total {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--light-gray);
+  .booking-page h2 {
+    font-size: 1.5rem;
+  }
+
+  .booking-details h3 {
+    font-size: 1.3rem;
+  }
 }

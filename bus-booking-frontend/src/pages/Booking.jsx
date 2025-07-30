@@ -73,7 +73,7 @@ const Booking = () => {
         </h3>
         <p>Departure: {new Date(scheduleWithRoute.departure_time).toLocaleString()}</p>
         <p>Arrival: {new Date(scheduleWithRoute.arrival_time).toLocaleString()}</p>
-        <p>Price per seat: ${scheduleWithRoute.price_per_seat}</p>
+        <p>Price per seat: Ksh {scheduleWithRoute.price_per_seat}</p>
         <p>Available seats: {scheduleWithRoute.available_seats}</p>
       </div>
 
@@ -104,7 +104,7 @@ const Booking = () => {
           </select>
         </div>
         <div className="price-summary">
-          <h4>Total: ${(scheduleWithRoute.price_per_seat * formData.seats).toFixed(2)}</h4>
+          <h4>Total: Ksh {(scheduleWithRoute.price_per_seat * formData.seats).toFixed(2)}</h4>
         </div>
         <button 
           type="submit" 

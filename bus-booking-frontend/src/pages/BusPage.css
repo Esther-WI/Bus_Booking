@@ -1,0 +1,196 @@
+/* BusesPage.css */
+.buses-page {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+}
+
+.buses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.buses-header h2 {
+  font-size: 2rem;
+  margin: 0;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.buses-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #00bfff);
+  border-radius: 4px;
+}
+
+.buses-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.buses-actions button {
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.buses-actions button:hover {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.buses-actions button:last-child {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.buses-actions button:last-child:hover {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.selection-notice {
+  background: #f1f9fe;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #d4edff;
+  text-align: center;
+}
+
+.selection-notice p {
+  margin: 0;
+  color: #3498db;
+  font-weight: 500;
+}
+
+.buses-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.bus-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+}
+
+.bus-card.selectable {
+  cursor: pointer;
+}
+
+.bus-card.selectable:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: #3498db;
+}
+
+.bus-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+}
+
+.bus-card p {
+  margin: 0.3rem 0;
+  color: #5a6a7b;
+}
+
+.bus-card .bus-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bus-card .bus-actions button {
+  padding: 0.5rem 1rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bus-card .bus-actions button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #3498db;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.buses-list > p {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: #7f8c8d;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .buses-page {
+    padding: 1.5rem;
+  }
+
+  .buses-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .buses-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .buses-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .buses-page {
+    padding: 1rem;
+  }
+
+  .buses-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .buses-list {
+    grid-template-columns: 1fr;
+  }
+}

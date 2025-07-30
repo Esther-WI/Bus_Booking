@@ -8,7 +8,7 @@ const About = () => {
         <section>
           <h3>Our Story</h3>
           <p>
-            Founded in 2023, BusBooking is dedicated to providing reliable and
+            Founded in 2025, BusBooking is dedicated to providing reliable and
             comfortable bus travel services across the country. We started with
             a single route and have grown to serve over 50 destinations
             nationwide.
@@ -38,9 +38,9 @@ const About = () => {
           <p>
             Email: info@busbooking.com
             <br />
-            Phone: +1 234 567 890
+            Phone: +254 798575346
             <br />
-            Address: 123 Bus Street, Transit City, TC 12345
+            Address: Hilton Plaza, Moi Avenue Street
           </p>
         </section>
       </div>

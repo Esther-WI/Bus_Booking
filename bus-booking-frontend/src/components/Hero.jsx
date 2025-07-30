@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Hero.css"; // Assuming you have a CSS file for styling
+import "./Hero.css"; 
 import heroBus from "../assets/bus1.jpeg";
 
 const Hero = () => {

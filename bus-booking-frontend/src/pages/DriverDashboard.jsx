@@ -15,7 +15,7 @@ const DriverDashboard = () => {
     const fetchDriverData = async () => {
       try {
         const [busResponse, schedulesResponse] = await Promise.all([
-          api.get(`http://127.0.0.1:5000/api/buses/my/`),
+          api.get(`http://127.0.0.1:5000/api/buses/my`),
           api.get(`http://127.0.0.1:5000/api/schedules/driver/my`),
         ]);
 

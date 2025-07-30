@@ -13,7 +13,7 @@ const RouteCard = ({ route, schedule }) => {
           <>
             <p>Departure: {new Date(schedule.departure_time).toLocaleString()}</p>
             <p>Arrival: {new Date(schedule.arrival_time).toLocaleString()}</p>
-            <p>Price: ${schedule.price_per_seat}</p>
+            <p>Price: Ksh {schedule.price_per_seat}</p>
             <p>Available Seats: {schedule.available_seats}</p>
           </>
         ) : (

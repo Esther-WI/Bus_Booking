@@ -86,7 +86,7 @@ const Footer = () => {
             <h3>Contact Us</h3>
             <ul className="contact-icons">
               <li>
-                <FaPhoneAlt /> <span>1-800-BUS-BOOK</span>
+                <FaPhoneAlt /> <span>+254 78947583</span>
               </li>
               <li>
                 <FaEnvelope /> <span>support@busbooker.com</span>

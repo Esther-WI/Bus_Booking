@@ -1,57 +1,120 @@
-/* Routecard.css */
-
+/* RouteCard.css */
 .route-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid #e9ecef;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  min-width: 260px;
+  height: 100%;
 }
 
 .route-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: #3498db;
+}
+
+.route-info {
+  padding: 1.5rem;
+  flex-grow: 1;
 }
 
 .route-info h3 {
-  font-size: 1.2rem;
-  color: #1f2937; /* Dark Gray */
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.route-info h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #00bfff);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.route-card:hover .route-info h3::after {
+  width: 80px;
 }
 
 .route-info p {
-  font-size: 0.95rem;
-  color: #374151;
-  margin: 0.2rem 0;
+  margin: 0.5rem 0;
+  color: #5a6a7b;
+  line-height: 1.5;
+}
+
+.route-info p:last-of-type {
+  margin-bottom: 0;
 }
 
 .route-actions {
-  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
   display: flex;
   justify-content: flex-end;
 }
 
 .book-button {
-  padding: 0.5rem 1.2rem;
-  background-color: rgb(32, 204, 235);
-  color: #000;
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 50px;
   font-weight: 600;
-  border-radius: 0.5rem;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
 .book-button:hover {
-  background-color: #0bbfd8;
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
 }
 
-.routes-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  padding: 1rem 0;
+.book-button:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Status indicators */
+.no-schedule {
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+/* Price highlighting */
+.route-info p:nth-of-type(3) {
+  font-weight: 600;
+  color: #2ecc71;
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .route-info {
+    padding: 1.2rem;
+  }
+  
+  .route-info h3 {
+    font-size: 1.2rem;
+  }
+  
+  .book-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
 }
