@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext.jsx";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import "./NavBar.css"; // Assuming you have a CSS file for styling
 
 const Navbar = () => {
+  const { bus_id } = useParams()
   const { user, isAuthenticated, logout } = useContext(AuthContext);
 
   return (
@@ -18,13 +20,18 @@ const Navbar = () => {
 
         {isAuthenticated ? (
           <>
-            {user?.role === "admin" && (
-              <Link to="/admin-dashboard">Admin Dashboard</Link>
+            {user?.role === "Admin" && (
+              <Link to="/admin/dashboard-data">Admin Dashboard</Link>
             )}
-            {user?.role === "driver" && (
-              <Link to="/driver-dashboard">Driver Dashboard</Link>
+            {user?.role === "Driver" && (
+              <>
+                <Link to="/driver-dashboard">Driver Dashboard</Link>
+                <Link to="/buses">My buses</Link>
+              </>
+
+              
             )}
-            <Link to="/feedback">Feedback</Link>
+            <Link to={"/buses"}>Feedback</Link>
             <button onClick={logout}>Logout</button>
           </>
         ) : (

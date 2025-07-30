@@ -9,6 +9,7 @@ const BusesPage = () => {
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [userRole, setUserRole] = useState(null);
+  const [isSelectMode, setIsSelectMode] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,9 +20,11 @@ const BusesPage = () => {
         setUserRole(roleResponse.data.role);
         
         // Fetch buses based on role
-        const endpoint = roleResponse.data.role === "Admin" 
-          ? "http://127.0.0.1:5000/api/buses" 
-          : "http://127.0.0.1:5000/api/buses/my";
+        const endpoint = roleResponse.data.role === "Customer" 
+        ? "http://127.0.0.1:5000/api/buses/"  // Customers see all buses to review
+        : roleResponse.data.role === "Admin"
+          ? "http://127.0.0.1:5000/api/buses/"
+          : "http://127.0.0.1:5000/api/buses/my";  // Drivers see their assigned buses
         const busesResponse = await api.get(endpoint);
         setBuses(busesResponse.data);
       } catch (err) {
@@ -36,7 +39,7 @@ const BusesPage = () => {
 
   const handleCreateBus = async (busData) => {
     try {
-      const response = await api.post("http://127.0.0.1:5000/api/buses", busData);
+      const response = await api.post("http://127.0.0.1:5000/api/buses/", busData);
       setBuses([...buses, response.data]);
       setShowForm(false);
       setError("");
@@ -45,18 +48,42 @@ const BusesPage = () => {
     }
   };
 
+  const handleSelectBus = (busId) => {
+    if (isSelectMode) {
+      navigate(`/buses/${busId}/reviews`); // Changed to match your API endpoint
+    } else {
+      navigate(`/buses/${busId}`);
+    }
+  };
+
+  const toggleSelectMode = () => {
+    setIsSelectMode(!isSelectMode);
+    setShowForm(false); // Hide form when switching modes
+  };
+
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
 
   return (
     <div className="buses-page">
-      <h2>{userRole === "Admin" ? "All Buses" : "My Assigned Buses"}</h2>
-      
-      {userRole === "Admin" && (
-        <button onClick={() => setShowForm(!showForm)}>
-          {showForm ? "Cancel" : "Add New Bus"}
-        </button>
-      )}
+      <div className="buses-header">
+        <h2>{userRole === "Admin" ? "All Buses" : "My Assigned Buses"}</h2>
+        
+        <div className="buses-actions">
+          {userRole === "Admin" && (
+            <button onClick={() => setShowForm(!showForm)}>
+              {showForm ? "Cancel" : "Add New Bus"}
+            </button>
+          )}
+          
+          {/* Only show feedback button for customers */}
+          {userRole === "Customer" && (
+            <button onClick={toggleSelectMode}>
+              {isSelectMode ? "Cancel Feedback" : "Leave Feedback"}
+            </button>
+          )}
+        </div>
+      </div>
 
       {showForm && (
         <BusForm 
@@ -65,17 +92,30 @@ const BusesPage = () => {
         />
       )}
 
+      {isSelectMode && (
+        <div className="selection-notice">
+          <p>Select a bus to leave your review</p>
+        </div>
+      )}
+
       <div className="buses-list">
         {buses.length > 0 ? (
           buses.map(bus => (
-            <div key={bus.id} className="bus-card">
+            <div 
+              key={bus.id} 
+              className={`bus-card ${isSelectMode ? 'selectable' : ''}`}
+              onClick={() => handleSelectBus(bus.id)}
+            >
               <h3>{bus.model} ({bus.registration_number})</h3>
               <p>Capacity: {bus.capacity}</p>
               <p>Status: {bus.status}</p>
               
-              {userRole === "Admin" && (
+              {userRole === "Admin" && !isSelectMode && (
                 <div className="bus-actions">
-                  <button onClick={() => navigate(`http://127.0.0.1:5000/api/buses/${bus.id}`)}>
+                  <button onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/buses/${bus.id}`);
+                  }}>
                     Edit
                   </button>
                 </div>

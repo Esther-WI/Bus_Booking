@@ -27,7 +27,16 @@ class Review(db.Model):
             "user_id": self.user_id,
             "rating": self.rating,
             "comment": self.comment,
-            "date": self.created_at.isoformat()
+            "date": self.created_at.isoformat(),
+            "user": {
+                "id": self.user.id,
+                "username": self.user.username,  # Assuming User model has these fields
+                "email": self.user.email
+            },
+            "bus": {
+                "id": self.bus.id,
+                "model": self.bus.model
+            }
         }
     
     @validates('text')

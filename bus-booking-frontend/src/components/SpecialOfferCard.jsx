@@ -10,7 +10,6 @@ const SpecialOfferCard = ({ offer }) => {
           <span className="offer-terms">{offer.terms}</span>
         </div>
       </div>
-      <button className="offer-button">Get Offer</button>
     </div>
   );
 };

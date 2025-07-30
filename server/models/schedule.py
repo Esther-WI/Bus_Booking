@@ -49,7 +49,7 @@ class Schedule(db.Model):
         return {
             "id": self.id,
             "bus": self.basic_info if self.bus else None,
-            "route": self.basic_info if self.route else None,
+            "route": self.route.to_dict() if self.route else None,
             "departure_time": self.departure_time.isoformat() if self.departure_time else None,
             "arrival_time": self.arrival_time.isoformat() if self.arrival_time else None,
             "bookings": [ b.basic_info for b in self.bookings ]

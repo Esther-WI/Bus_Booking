@@ -17,9 +17,9 @@ const AdminDashboard = () => {
       try {
         const [usersResponse, schedulesResponse, busesResponse] =
           await Promise.all([
-            api.get("http://127.0.0.1:5000/api/users"),
-            api.get("http://127.0.0.1:5000/api/schedules"),
-            api.get("http://127.0.0.1:5000/api/buses"),
+            api.get("http://127.0.0.1:5000/api/admin/users"),
+            api.get("http://127.0.0.1:5000/api/schedules/"),
+            api.get("http://127.0.0.1:5000/api/buses/"),
           ]);
 
         setUsers(usersResponse.data);
@@ -56,8 +56,8 @@ const AdminDashboard = () => {
   const handleBusSubmit = async (busData) => {
     try {
       const response = busData.id
-        ? await api.put(`http://127.0.0.1:5000/api/buses/${busData.id}`, busData)
-        : await api.post("http://127.0.0.1:5000/api/buses", busData);
+        ? await api.patch(`http://127.0.0.1:5000/api/buses/${busData.id}`, busData)
+        : await api.post("http://127.0.0.1:5000/api/buses/", busData);
 
       setBuses(
         busData.id
