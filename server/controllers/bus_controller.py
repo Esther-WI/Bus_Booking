@@ -129,6 +129,12 @@ def update_bus(bus_id):
     except Exception as e:
         db.session.rollback()
         return {"error": "Failed to update bus"}, 500
+    
+@bus_bp.route("/<int:bus_id>", methods=["GET"])
+def get_bus(bus_id):
+    bus = Bus.query.get_or_404(bus_id)
+    return jsonify(bus.to_dict())
+    
 
 
 

@@ -1,0 +1,120 @@
+/* BookingsList.css */
+
+.bookings-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+  }
+  
+  .bookings-container h2 {
+    font-size: 1.8rem;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .bookings-table thead {
+    background-color: #f3f4f6;
+  }
+  
+  .bookings-table th {
+    padding: 1rem;
+    text-align: left;
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  
+  .bookings-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+    font-size: 0.9rem;
+  }
+  
+  .bookings-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .bookings-table tr:hover {
+    background-color: #f9fafb;
+  }
+  
+  .bookings-table small {
+    color: #6b7280;
+    font-size: 0.8rem;
+  }
+  
+  .status-confirmed {
+    color: #10b981; /* Green */
+    font-weight: 500;
+  }
+  
+  .status-cancelled {
+    color: #ef4444; /* Red */
+    font-weight: 500;
+  }
+  
+  .status-pending {
+    color: #f59e0b; /* Amber */
+    font-weight: 500;
+  }
+  
+  .cancel-btn, .delete-btn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cancel-btn {
+    background-color: #fef3c7;
+    color: #d97706;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #fde68a;
+  }
+  
+  .delete-btn {
+    background-color: #fee2e2;
+    color: #dc2626;
+  }
+  
+  .delete-btn:hover {
+    background-color: #fecaca;
+  }
+  
+  .error {
+    color: #dc2626;
+    background-color: #fee2e2;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+  
+  @media (max-width: 768px) {
+    .bookings-table {
+      display: block;
+      overflow-x: auto;
+    }
+    
+    .bookings-container {
+      padding: 0 1rem;
+    }
+  }

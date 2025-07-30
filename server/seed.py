@@ -47,21 +47,24 @@ with app.app_context():
             route_id=routes[0].id,
             departure_time=datetime(2025, 7, 25, 8, 30),
             arrival_time=datetime(2025, 7, 25, 12, 30),
-            price_per_seat=1000
+            price_per_seat=1000,
+            available_seats=40
         ),
         Schedule(
             bus_id=buses[1].id,
             route_id=routes[1].id,
             departure_time=datetime(2025, 7, 26, 10, 0),
             arrival_time=datetime(2025, 7, 26, 16, 0),
-            price_per_seat=1500
+            price_per_seat=1500,
+            available_seats=40
         ),
         Schedule(
             bus_id=buses[0].id,
             route_id=routes[1].id,
             departure_time=datetime(2025, 7, 27, 9, 0),
             arrival_time=datetime(2025, 7, 27, 14, 30),
-            price_per_seat=1200
+            price_per_seat=1200,
+            available_seats=40
         )
     ]
 

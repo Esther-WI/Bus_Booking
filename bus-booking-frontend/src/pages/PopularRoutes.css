@@ -1,0 +1,202 @@
+/* PopularRoutes.css */
+.popular-routes-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  /* Header Section */
+  .popular-routes-page h2 {
+    color: #1f2937; 
+    font-size: 1.8rem;
+    margin-bottom: 1.8rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 0.8rem;
+  }
+  
+  .popular-routes-page h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: rgb(32, 204, 235); 
+  }
+  
+  /* Toggle Button */
+  .toggle-form-btn {
+    padding: 0.6rem 1.3rem;
+    background-color: rgb(32, 204, 235);
+    color: #000;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 6px rgba(32, 204, 235, 0.2);
+  }
+  
+  .toggle-form-btn:hover {
+    background-color: #0bbfd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(32, 204, 235, 0.3);
+  }
+  
+  /* Form Styling */
+  .route-form {
+    background-color: #ffffff;
+    padding: 1.8rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2.5rem;
+  }
+  
+  .route-form h3 {
+    color: #1f2937;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.3rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.6rem;
+    color: #374151;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: rgb(32, 204, 235);
+    box-shadow: 0 0 0 3px rgba(32, 204, 235, 0.1);
+  }
+  
+  .submit-btn {
+    padding: 0.7rem 1.5rem;
+    background-color: rgb(32, 204, 235);
+    color: #000;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 6px rgba(32, 204, 235, 0.2);
+  }
+  
+  .submit-btn:hover {
+    background-color: #0bbfd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(32, 204, 235, 0.3);
+  }
+  
+  /* Routes List */
+  .routes-list {
+    display: grid;
+    gap: 1.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 1rem 0;
+  }
+  
+  .route-with-schedules {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+  }
+  
+  .route-with-schedules:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  .route-summary {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed #e2e8f0;
+  }
+  
+  .route-summary h3 {
+    color: #1f2937;
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+  }
+  
+  .route-summary p {
+    color: #374151;
+    font-size: 0.95rem;
+    margin: 0.4rem 0;
+    line-height: 1.5;
+  }
+  
+  /* Schedules Container */
+  .schedules-container {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .schedules-container h4 {
+    color: #1f2937;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Status Message */
+  .loading {
+    text-align: center;
+    padding: 2.5rem;
+    color: rgb(32, 204, 235);
+    font-weight: 500;
+  }
+  
+  .error-message {
+    color: #ef4444;
+    background-color: #fee2e2;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    border-left: 4px solid #ef4444;
+  }
+  
+  .no-routes {
+    text-align: center;
+    padding: 2.5rem;
+    color: #6b7280;
+    grid-column: 1 / -1;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .popular-routes-page {
+      padding: 1.2rem;
+    }
+    
+    .route-form {
+      padding: 1.4rem;
+    }
+    
+    .routes-list {
+      grid-template-columns: 1fr;
+    }
+  }

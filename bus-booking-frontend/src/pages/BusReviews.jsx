@@ -4,10 +4,11 @@ import RatingStars from "../components/RatingStars";
 import CommentCard from "../components/CommentCard";
 import api from "../utils/api";
 import { AuthContext } from "../context/AuthContext";
+import "./BusReviews.css";
 
 const BusReviews = () => {
   const params = useParams();
-  console.log("Route params:", params); // Check what you're actually getting
+  console.log("Route params:", params); 
   
   const { id: bus_id } = useParams();
   console.log("Extracted bus_id:", bus_id);
@@ -25,7 +26,7 @@ const BusReviews = () => {
     const fetchData = async () => {
       try {
         // Fetch bus details
-        const busResponse = await api.get("http://127.0.0.1:5000/api/buses/search");
+        const busResponse = await api.get(`http://127.0.0.1:5000/api/buses/${bus_id}`);
         setBusDetails(busResponse.data);
         
         // Fetch reviews for this bus
@@ -57,7 +58,7 @@ const BusReviews = () => {
       const response = await api.post(`http://127.0.0.1:5000/api/buses/${bus_id}/reviews`, {
         rating: newComment.rating,
         text: newComment.text,
-        comment: newComment.text // Include both if your backend expects it
+        comment: newComment.text 
       });
 
       setComments([response.data, ...comments]);

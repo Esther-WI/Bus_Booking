@@ -9,7 +9,7 @@
 
 /* === HERO SECTION === */
 .search-hero {
-  background-image: url('/assets/bus-travel.jpg'); /* Use your own background */
+  background-image: url('/assets/bus-travel.jpg');
   background-size: cover;
   background-position: center;
   color: #fff;

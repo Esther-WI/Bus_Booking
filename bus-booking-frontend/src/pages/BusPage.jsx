@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import BusForm from "../components/BusForm";
+import "./BusPage.css"
 
 const BusesPage = () => {
   const [buses, setBuses] = useState([]);

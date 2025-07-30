@@ -1,0 +1,95 @@
+/* SpecialOfferCard.css */
+
+.special-offer-card {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .special-offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .offer-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ef4444; /* Red for urgency */
+    color: white;
+    padding: 0.25rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-bottom-left-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .offer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .special-offer-card h3 {
+    font-size: 1.25rem;
+    color: #1f2937;
+    margin: 0;
+    padding-right: 2rem; /* Space for badge */
+  }
+  
+  .offer-description {
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .offer-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+  
+  .offer-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #10b981; /* Green for positive/discount */
+  }
+  
+  .offer-terms {
+    font-size: 0.8rem;
+    color: #6b7280;
+    text-align: right;
+  }
+  
+  /* Optional: Add a subtle gradient background for visual interest */
+  .special-offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #10b981);
+  }
+  
+  @media (max-width: 768px) {
+    .special-offer-card {
+      padding: 1.25rem;
+    }
+    
+    .special-offer-card h3 {
+      font-size: 1.1rem;
+    }
+    
+    .offer-price {
+      font-size: 1.3rem;
+    }
+  }

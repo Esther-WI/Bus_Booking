@@ -1,0 +1,144 @@
+/* BusesPage.css */
+
+.buses-page {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+  }
+  
+  .loading {
+    text-align: center;
+    padding: 2rem;
+    color: #1f2937;
+  }
+  
+  .error {
+    color: #dc2626;
+    background-color: #fee2e2;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    text-align: center;
+  }
+  
+  .buses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .buses-header h2 {
+    font-size: 1.8rem;
+    color: #1f2937;
+    margin: 0;
+  }
+  
+  .buses-actions {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .buses-actions button {
+    padding: 0.5rem 1rem;
+    background-color: rgb(32, 204, 235);
+    color: #000;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+  }
+  
+  .buses-actions button:hover {
+    background-color: #0bbfd8;
+  }
+  
+  .selection-notice {
+    background-color: #f0fdf4;
+    color: #166534;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .buses-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .bus-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .bus-card.selectable {
+    cursor: pointer;
+  }
+  
+  .bus-card.selectable:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  .bus-card h3 {
+    font-size: 1.2rem;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+  }
+  
+  .bus-card p {
+    font-size: 0.95rem;
+    color: #374151;
+    margin: 0.5rem 0;
+  }
+  
+  .bus-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .bus-actions button {
+    padding: 0.4rem 0.8rem;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 0.85rem;
+  }
+  
+  .bus-actions button:hover {
+    background-color: #e5e7eb;
+  }
+  
+  @media (max-width: 768px) {
+    .buses-page {
+      padding: 0 1rem;
+    }
+    
+    .buses-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .buses-list {
+      grid-template-columns: 1fr;
+    }
+    
+    .bus-card {
+      padding: 1rem;
+    }
+  }

@@ -1,3 +1,5 @@
+import "./RatingStars.css"
+
 const RatingStars = ({ rating, setRating, editable = false }) => {
   const stars = [1, 2, 3, 4, 5];
 

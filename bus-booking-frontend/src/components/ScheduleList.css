@@ -1,0 +1,95 @@
+/* ScheduleList.css */
+
+.schedule-list {
+    margin-top: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .schedule-list h3 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .schedule-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .schedule-list thead {
+    background-color: #f3f4f6;
+  }
+  
+  .schedule-list th {
+    padding: 1rem;
+    text-align: left;
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  
+  .schedule-list td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+    font-size: 0.9rem;
+  }
+  
+  .schedule-list tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .schedule-list tr:hover {
+    background-color: #f9fafb;
+  }
+  
+  .schedule-list button {
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .schedule-list button:first-of-type {
+    background-color: #e0f2fe;
+    color: #0369a1;
+  }
+  
+  .schedule-list button:first-of-type:hover {
+    background-color: #bae6fd;
+  }
+  
+  .schedule-list button:last-of-type {
+    background-color: #fee2e2;
+    color: #dc2626;
+  }
+  
+  .schedule-list button:last-of-type:hover {
+    background-color: #fecaca;
+  }
+  
+  @media (max-width: 768px) {
+    .schedule-list {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    
+    .schedule-list table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    
+    .schedule-list th,
+    .schedule-list td {
+      padding: 0.75rem 0.5rem;
+    }
+  }

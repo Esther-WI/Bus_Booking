@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../utils/api";
+import "./BookingsList.css";
 
 const BookingsList = () => {
   const [bookings, setBookings] = useState([]);
@@ -38,6 +39,11 @@ const BookingsList = () => {
     try {
       await api.delete(`http://127.0.0.1:5000/api/bookings/${id}`);
       setBookings(bookings.filter(b => b.id !== id));
+      setSuccess("Booking deleted successfully");
+      setTimeout(() => {
+        setSuccess("");
+        navigate(""); // Redirect to homepage after 2 seconds
+      }, 2000);
     } catch (err) {
       setError(err.response?.data?.error);
     }

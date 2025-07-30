@@ -3,6 +3,7 @@ from server.models import Schedule, Route, Bus
 from server.extensions import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from server.utils.auth import role_required
+from sqlalchemy.orm import joinedload
 
 schedule_bp = Blueprint("schedules", __name__, url_prefix="/api/schedules")
 
@@ -63,7 +64,17 @@ def search_schedules():
 
 @schedule_bp.route("/<int:id>/route", methods=["GET"])
 def get_schedule_with_route(id):
-    schedule = Schedule.query.get_or_404(id)
+    schedule = Schedule.query.options(
+        joinedload(Schedule.route),
+        joinedload(Schedule.bus)
+    ).get_or_404(id)
+
+    booked_seats = len(schedule.bookings)
+    bus_capacity = schedule.bus.capacity if schedule.bus else 0
+    available_seats = bus_capacity - booked_seats
+
+    schedule.available_seats = available_seats
+
     return jsonify({
         **schedule.to_dict(),
         "route": schedule.route.to_dict()  # Frontend expects combined data

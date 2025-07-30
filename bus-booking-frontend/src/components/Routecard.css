@@ -1,6 +1,7 @@
-/* Routecard.css */
+/* RouteCard.css */
 
 .route-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -8,50 +9,123 @@
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  min-width: 260px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  height: 100%;
 }
 
 .route-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.route-info {
+  margin-bottom: 1.5rem;
 }
 
 .route-info h3 {
-  font-size: 1.2rem;
-  color: #1f2937; /* Dark Gray */
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.route-info h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  border-radius: 3px;
 }
 
 .route-info p {
   font-size: 0.95rem;
-  color: #374151;
-  margin: 0.2rem 0;
+  color: #4b5563;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.route-info p::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #9ca3af;
+  margin-right: 0.5rem;
 }
 
 .route-actions {
-  margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
 }
 
 .book-button {
-  padding: 0.5rem 1.2rem;
+  padding: 0.75rem 1.5rem;
   background-color: rgb(32, 204, 235);
   color: #000;
   font-weight: 600;
   border-radius: 0.5rem;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: inline-block;
 }
 
 .book-button:hover {
   background-color: #0bbfd8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(32, 204, 235, 0.2);
 }
 
-.routes-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  padding: 1rem 0;
+/* Status indicator for available seats */
+.route-info p:last-child {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.route-info p:last-child::before {
+  background-color: transparent;
+  margin-right: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .route-card {
+    padding: 1.25rem;
+  }
+  
+  .route-info h3 {
+    font-size: 1.1rem;
+  }
+  
+  .book-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Special styling when few seats are available */
+.route-card[data-seats="low"] {
+  border-left: 4px solid #f59e0b;
+}
+
+.route-card[data-seats="very-low"] {
+  border-left: 4px solid #ef4444;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }

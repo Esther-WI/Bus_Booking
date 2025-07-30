@@ -110,3 +110,142 @@
   padding-top: 1rem;
   border-top: 1px solid var(--light-gray);
 }
+
+/* Booking.css - Additional Styles */
+
+.booking-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.booking-page h2 {
+  font-size: 1.8rem;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.booking-details {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.booking-details h3 {
+  font-size: 1.3rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.booking-details p {
+  font-size: 0.95rem;
+  color: #374151;
+  margin: 0.5rem 0;
+}
+
+.booking-form {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #1f2937;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: rgb(32, 204, 235);
+  box-shadow: 0 0 0 3px rgba(32, 204, 235, 0.1);
+}
+
+.price-summary {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.price-summary h4 {
+  font-size: 1.2rem;
+  color: #1f2937;
+  text-align: right;
+}
+
+.confirm-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(32, 204, 235);
+  color: #000;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.confirm-button:hover {
+  background-color: #0bbfd8;
+}
+
+.confirm-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #1f2937;
+}
+
+.error-message {
+  color: #dc2626;
+  background-color: #fee2e2;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.not-found {
+  text-align: center;
+  padding: 2rem;
+  color: #1f2937;
+}
+
+@media (max-width: 768px) {
+  .booking-page {
+    padding: 0 1rem;
+  }
+  
+  .booking-details,
+  .booking-form {
+    padding: 1rem;
+  }
+}

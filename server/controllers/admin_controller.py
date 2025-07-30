@@ -67,7 +67,6 @@ def delete_user(user_id):
             for bus in buses_driven:
                 bus.driver_id = alternate_driver.id
         
-        # Proceed with deletion
         db.session.delete(user)
         db.session.commit()
         

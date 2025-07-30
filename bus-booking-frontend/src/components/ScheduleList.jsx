@@ -1,3 +1,4 @@
+import "./ScheduleList.css"
 const ScheduleList = ({ schedules, onDelete, onEdit, userRole }) => {
   return (
     <div className="schedule-list">

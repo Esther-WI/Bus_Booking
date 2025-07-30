@@ -1,3 +1,5 @@
+import "./SpecialOfferCard.css"
+
 const SpecialOfferCard = ({ offer }) => {
   return (
     <div className="special-offer-card">

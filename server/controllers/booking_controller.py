@@ -39,7 +39,6 @@ def create():
 def user_bookings():
     user = current_user()
     
-    # Correct query - using filter_by instead of get
     bookings = Booking.query.options(
         joinedload(Booking.schedule).joinedload(Schedule.route),
         joinedload(Booking.schedule).joinedload(Schedule.bus)

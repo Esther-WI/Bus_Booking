@@ -35,7 +35,10 @@ class Review(db.Model):
             },
             "bus": {
                 "id": self.bus.id,
-                "model": self.bus.model
+                "model": self.bus.model,
+                "registration_number": self.bus.registration_number,
+                "capacity": self.bus.capacity,
+                "status": self.bus.status
             }
         }
     
