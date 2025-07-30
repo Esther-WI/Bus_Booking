@@ -12,7 +12,6 @@ bus_bp = Blueprint("buses", __name__, url_prefix="/api/buses")
 def get_buses():
     return jsonify([b.to_dict() for b in Bus.query.all()])
 
-
 # only admins to add a bus(role based access) 
 @bus_bp.route("/", methods=["POST"])
 @jwt_required()

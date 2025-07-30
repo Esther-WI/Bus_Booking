@@ -1,10 +1,17 @@
 # seed.py
-from server.app import app
+from server.app import create_app
 from server.extensions import db
-from server.models import *
-from server.app import app
+
+
+from server.models import User, Route, Bus, Schedule, Booking, Offer
+
+# from server.models import *
+# from server.app import app
+
 from datetime import datetime, timedelta
 import random
+
+app = create_app()
 
 with app.app_context():
     print("🔄 Dropping and creating all tables...")
@@ -125,6 +132,7 @@ with app.app_context():
 
     db.session.add_all(reviews)
     db.session.commit()
+
 
 
 
