@@ -48,11 +48,23 @@ class Schedule(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "bus": self.basic_info if self.bus else None,
-            "route": self.route.to_dict() if self.route else None,
             "departure_time": self.departure_time.isoformat() if self.departure_time else None,
             "arrival_time": self.arrival_time.isoformat() if self.arrival_time else None,
-            "bookings": [ b.basic_info for b in self.bookings ]
+            "price_per_seat": self.price_per_seat,
+            "available_seats": self.available_seats,
+            "bus": {
+                "id": self.bus.id,
+                "model": self.bus.model,
+                "capacity": self.bus.capacity,
+                "registration_number": self.bus.registration_number
+            } if self.bus else None,
+            "route": {
+                "id": self.route.id,
+                "origin": self.route.origin,
+                "destination": self.route.destination,
+                "distance": float(self.route.distance),
+                "estimated_duration": self.route.estimated_duration
+            } if self.route else None
         }
 
     @property

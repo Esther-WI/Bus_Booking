@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import RouteCard from "../components/RouteCard";
 import api from "../utils/api";
 
+
 const PopularRoutes = () => {
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -55,7 +56,13 @@ const PopularRoutes = () => {
     setError("");
     
     try {
-      const response = await api.post("http://127.0.0.1:5000/api/routes", newRoute);
+      const numericData = {
+        ...newRoute,
+        distance: parseFloat(newRoute.distance),
+        estimated_duration: parseInt(newRoute.estimated_duration)
+      };
+  
+      const response = await api.post("http://127.0.0.1:5000/api/routes/", numericData);
       setRoutes([response.data, ...routes]);
       setShowForm(false);
       setNewRoute({

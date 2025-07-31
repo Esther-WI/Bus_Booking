@@ -48,8 +48,10 @@ class Route(db.Model):
             "id": self.id,
             "origin": self.origin,
             "destination": self.destination,
+            "distance": float(self.distance) if self.distance is not None else 0,
+            "estimated_duration": int(self.estimated_duration) if self.estimated_duration is not None else 0,
             "schedules": [s.basic_info for s in self.schedules]
-        }
+    }
         
     @property
     def basic_info(self):
