@@ -17,15 +17,27 @@ const Booking = () => {
   useEffect(() => {
     const fetchScheduleWithRoute = async () => {
       try {
+        // Add validation for ID
+        if (!id || isNaN(id)) {
+          throw new Error("Invalid schedule ID");
+        }
+        
         const response = await api.get(`http://127.0.0.1:5000/api/schedules/${id}/route`);
+        
+        // Validate response data
+        if (!response.data || !response.data.route) {
+          throw new Error("Invalid schedule data received");
+        }
+        
         setScheduleWithRoute(response.data);
       } catch (err) {
-        setError(err.response?.data?.message || "Failed to fetch schedule details");
+        console.error("Fetch error:", err);
+        setError(err.response?.data?.message || err.message || "Failed to fetch schedule details");
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchScheduleWithRoute();
   }, [id]);
 

@@ -68,7 +68,7 @@ const BusesPage = () => {
   return (
     <div className="buses-page">
       <div className="buses-header">
-        <h2>{userRole === "Admin" ? "All Buses" : "My Assigned Buses"}</h2>
+        <h2>{userRole === "Admin" ? "All Buses" : "Buses"}</h2>
         
         <div className="buses-actions">
           {userRole === "Admin" && (

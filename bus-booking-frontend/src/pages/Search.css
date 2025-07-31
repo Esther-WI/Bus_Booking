@@ -9,7 +9,7 @@
 
 /* === HERO SECTION === */
 .search-hero {
-  background-image: url('/assets/bus-travel.jpg');
+  background-image: url('/assets/bus-travel.jpg'); /* Use your own background */
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -159,6 +159,58 @@
 .no-routes button:hover {
   background-color: #0056b3;
 }
+
+.route-with-buses {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.buses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bus-card {
+  border: 1px solid #ddd;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  background-color: #fefefe;
+  box-shadow: 0 0 8px rgba(0,0,0,0.04);
+}
+
+.bus-schedules {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.schedule {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #f1f1f1;
+}
+
+.book-btn {
+  margin-top: 0.5rem;
+  padding: 0.4rem 1rem;
+  background-color: #00c4cc;
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.book-btn:hover {
+  background-color: #00a4aa;
+}
+
 
 /* === MEDIA QUERIES === */
 @media (max-width: 768px) {

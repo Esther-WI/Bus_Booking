@@ -5,7 +5,7 @@ class Bus(db.Model):
     __tablename__ = 'buses'
 
     id = db.Column(db.Integer, primary_key=True)
-    driver_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    driver_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     registration_number = db.Column(db.String(10), unique=True, nullable=False)
     model = db.Column(db.String(100), nullable=False)
     capacity = db.Column(db.Integer, nullable=False)

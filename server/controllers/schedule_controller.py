@@ -73,7 +73,7 @@ def get_schedule_with_route(id):
         joinedload(Schedule.route),
         joinedload(Schedule.bus)
     ).get_or_404(id)
-
+    print(f"Schedule ID {id} not found!") 
     booked_seats = len(schedule.bookings)
     bus_capacity = schedule.bus.capacity if schedule.bus else 0
     available_seats = bus_capacity - booked_seats
@@ -92,6 +92,37 @@ def get_drivers():
     drivers = User.query.filter_by(Role="Driver").all()
     return jsonify([driver.basic_info for driver in drivers])
 
+@schedule_bp.route("/<int:id>", methods=["PATCH", "PUT"])
+@jwt_required()
+@role_required("Admin", "Driver")
+def update_schedule(id):
+    schedule = Schedule.query.get_or_404(id)
+    data = request.get_json()
 
+    try:
+        # Update only the fields that are provided in the request
+        if 'route_id' in data:
+            schedule.route_id = data['route_id']
+        if 'bus_id' in data:
+            schedule.bus_id = data['bus_id']
+        if 'departure_time' in data:
+            schedule.departure_time = datetime.fromisoformat(data['departure_time'])
+        if 'arrival_time' in data:
+            schedule.arrival_time = datetime.fromisoformat(data['arrival_time'])
+        if 'price_per_seat' in data:  # Changed from 'price' to 'price_per_seat'
+            schedule.price_per_seat = data['price_per_seat']
+        if 'available_seats' in data:  # Note: matches your model's field name
+            schedule.available_seats = data['available_seats']
 
+        # Validate departure is before arrival
+        if schedule.departure_time >= schedule.arrival_time:
+            return {"error": "Departure time must be before arrival time"}, 400
 
+        db.session.commit()
+        return jsonify(schedule.to_dict()), 200
+    except ValueError as e:
+        db.session.rollback()
+        return {"error": str(e)}, 400
+    except Exception as e:
+        db.session.rollback()
+        return {"error": "Failed to update schedule"}, 500

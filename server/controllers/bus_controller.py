@@ -33,7 +33,13 @@ def create_bus():
 @role_required("Driver", "Admin","Customer")
 def my_buses():
     user = current_user()
-    buses = Bus.query.filter_by(driver_id=user.id).all()
+    if user.Role == "Driver":
+        buses = Bus.query.filter_by(driver_id=user.id).all()
+    elif user.Role == "Admin":
+        buses = Bus.query.all()
+    else:
+        return {"error": "Customers do not have assigned buses"}, 403
+
     return jsonify([b.to_dict() for b in buses])
 
 # Reviews
@@ -134,6 +140,16 @@ def update_bus(bus_id):
 def get_bus(bus_id):
     bus = Bus.query.get_or_404(bus_id)
     return jsonify(bus.to_dict())
+
+@bus_bp.route("/<int:bus_id>", methods=["DELETE"])
+@jwt_required()
+@role_required("Admin")
+def delete_bus(bus_id):
+    bus = Bus.query.get_or_404(bus_id)
+    db.session.delete(bus)
+    db.session.commit()
+    return {"message": "Bus deleted"}, 204
+
     
 
 

@@ -1,3 +1,5 @@
+import "./UserList.css"
+
 const UserList = ({ users, onDelete, onEdit }) => {
   console.log('Users data:', users)
   return (

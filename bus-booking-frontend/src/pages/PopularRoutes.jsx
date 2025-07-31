@@ -164,6 +164,7 @@ const PopularRoutes = () => {
                       key={schedule.id}
                       route={route}
                       schedule={schedule}
+                      onClick={() => navigate(`/booking/${schedule.id}`)}
                     />
                   ))}
                 </div>

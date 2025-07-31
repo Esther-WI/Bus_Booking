@@ -88,19 +88,17 @@ def delete_schedule(schedule_id):
         
         # Check for existing bookings
         if schedule.bookings:
-            return jsonify({
-                "error": "Schedule has existing bookings",
-                "booking_ids": [b.id for b in schedule.bookings]
-            }), 400
-        
+            return {
+                "error": "Cannot delete schedule with existing bookings. "
+                         "Cancel bookings first."
+            }, 400
+            
         db.session.delete(schedule)
         db.session.commit()
-        
         return jsonify({"message": "Schedule deleted successfully"}), 200
-        
     except Exception as e:
         db.session.rollback()
-        return jsonify({"error": str(e)}), 500
+        return {"error": str(e)}, 500
 
 @admin_bp.route('/role', methods=['GET'])
 @jwt_required()

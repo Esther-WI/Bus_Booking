@@ -6,7 +6,7 @@ const formatDateTime = (dateString) => {
   return date.toLocaleString(); // Format based on user's locale
 };
 
-const ScheduleList = ({ schedules, onDelete, onEdit, userRole }) => {
+const ScheduleList = ({ schedules, onEdit }) => {
   return (
     <div className="schedule-list">
       <h3>Bus Schedules</h3>
@@ -34,9 +34,6 @@ const ScheduleList = ({ schedules, onDelete, onEdit, userRole }) => {
                 </td>
                 <td>
                   <button onClick={() => onEdit(schedule)}>Edit</button>
-                  {userRole === "Admin" && (
-                    <button onClick={() => onDelete(schedule.id)}>Delete</button>
-                  )}
                 </td>
               </tr>
             ))
