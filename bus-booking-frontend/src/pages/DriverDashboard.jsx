@@ -18,16 +18,22 @@ const DriverDashboard = () => {
           api.get(`http://127.0.0.1:5000/api/buses/my`),
           api.get(`http://127.0.0.1:5000/api/schedules/driver/my`),
         ]);
-
-        setBus(busResponse.data);
-        setSchedules(schedulesResponse.data);
+  
+        // Check if bus exists (response might be array or object)
+        const busData = busResponse.data;
+        const bus = Array.isArray(busData) ? 
+          (busData.length > 0 ? busData[0] : null) : 
+          busData;
+  
+        setBus(bus);
+        setSchedules(Array.isArray(schedulesResponse.data) ? schedulesResponse.data : []);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to fetch driver data");
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchDriverData();
   }, [user]);
 

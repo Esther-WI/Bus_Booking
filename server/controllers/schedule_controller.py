@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from server.models import Schedule, Route, Bus
+from server.models import Schedule, Route, Bus,User
 from server.extensions import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from server.utils.auth import role_required
@@ -44,10 +44,15 @@ def upcoming_schedules(route_id):
 @jwt_required()
 def driver_schedules():
     user_id = get_jwt_identity()
-    bus_ids = [b.id for b in Bus.query.filter_by(driver_id=user_id).all()]
-    schedules = Schedule.query.filter(Schedule.bus_id.in_(bus_ids)).all()
-    return jsonify([s.to_dict() for s in schedules])
+    buses = Bus.query.filter_by(driver_id=user_id).all()
+    bus_ids = [b.id for b in buses]
 
+    schedules = Schedule.query.filter(Schedule.bus_id.in_(bus_ids)).options(
+        joinedload(Schedule.route),
+        joinedload(Schedule.bus).joinedload(Bus.driver)
+    ).all()
+
+    return jsonify([s.to_dict() for s in schedules])
 @schedule_bp.route("/search", methods=["GET"])
 def search_schedules():
     origin = request.args.get("origin")
@@ -79,6 +84,13 @@ def get_schedule_with_route(id):
         **schedule.to_dict(),
         "route": schedule.route.to_dict()  # Frontend expects combined data
     })
+
+@schedule_bp.route("/drivers", methods=["GET"])
+@jwt_required()
+@role_required("Admin", "Driver")  # Allow both admins and drivers
+def get_drivers():
+    drivers = User.query.filter_by(Role="Driver").all()
+    return jsonify([driver.basic_info for driver in drivers])
 
 
 
