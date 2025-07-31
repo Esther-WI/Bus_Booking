@@ -64,6 +64,8 @@ dist/
 /storage/*
 !/storage/.keep
 
+.gitignore
+
 # Other
 lib-cov/
 build/Release/
