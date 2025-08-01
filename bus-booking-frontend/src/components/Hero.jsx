@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
-import "./Hero.css"; 
-import heroBus from "../assets/bus1.jpeg";
+import "./Hero.css";
 
 const Hero = () => {
   return (
     <section className="hero-section">
+      <div className="hero-overlay"></div>
       <div className="hero-content">
-        <h1>Travel Smarter with BusBooker</h1>
+        <h1 className="hero-title">
+          Travel Smarter <span className="highlight">with BusBooker</span>
+        </h1>
         <p className="hero-subtitle">
           Book comfortable, affordable bus tickets to destinations nationwide.
-          <br />
           Safe travels, great prices, guaranteed.
         </p>
         <div className="hero-actions">
@@ -20,9 +21,6 @@ const Hero = () => {
             Popular Routes
           </Link>
         </div>
-      </div>
-      <div className="hero-image">
-        <img src={heroBus} alt="Comfortable bus interior" />
       </div>
     </section>
   );
