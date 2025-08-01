@@ -1,18 +1,18 @@
-/* RouteCard.css */
+/* RouteCard.css - Improved Version */
 
 .route-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background-color: #ffffff;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid #e5e7eb;
   overflow: hidden;
-  height: 100%;
+  transition: all 0.3s ease;
+  min-height: 280px; /* Set minimum height */
+  height: auto; /* Let it grow with content */
 }
 
 .route-card:hover {
@@ -20,16 +20,19 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
+/* Route Info Section - Tighter spacing */
 .route-info {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  flex-grow: 1; /* Allows this section to take available space */
 }
 
 .route-info h3 {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: #1f2937;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   position: relative;
   padding-bottom: 0.5rem;
+  line-height: 1.3;
 }
 
 .route-info h3::after {
@@ -43,12 +46,14 @@
   border-radius: 3px;
 }
 
+/* Compact info items */
 .route-info p {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #4b5563;
-  margin: 0.5rem 0;
+  margin: 0.35rem 0;
   display: flex;
   align-items: center;
+  line-height: 1.4;
 }
 
 .route-info p::before {
@@ -61,24 +66,30 @@
   margin-right: 0.5rem;
 }
 
+/* Action Button Section */
 .route-actions {
   display: flex;
   justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #f3f4f6;
 }
 
 .book-button {
-  padding: 0.75rem 1.5rem;
+  padding: 0.65rem 1.25rem;
   background-color: rgb(32, 204, 235);
   color: #000;
   font-weight: 600;
   border-radius: 0.5rem;
   text-decoration: none;
-  transition: all 0.3s ease;
-  text-align: center;
+  transition: all 0.2s ease;
   border: none;
   cursor: pointer;
-  font-size: 0.95rem;
-  display: inline-block;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
 }
 
 .book-button:hover {
@@ -87,34 +98,37 @@
   box-shadow: 0 4px 8px rgba(32, 204, 235, 0.2);
 }
 
-/* Status indicator for available seats */
-.route-info p:last-child {
+/* Special status indicators */
+.route-info p.seat-status {
   font-weight: 500;
   color: #1f2937;
+  margin-top: 0.5rem;
 }
 
-.route-info p:last-child::before {
-  background-color: transparent;
-  margin-right: 0;
+.route-info p.seat-status::before {
+  display: none;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .route-card {
     padding: 1.25rem;
+    min-height: 240px;
   }
   
   .route-info h3 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
   }
   
   .book-button {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+    min-width: 110px;
   }
 }
 
-/* Special styling when few seats are available */
+/* Seat availability indicators */
 .route-card[data-seats="low"] {
   border-left: 4px solid #f59e0b;
 }
@@ -128,4 +142,19 @@
   0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
   70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
   100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* Disabled state for when no schedules exist */
+.book-button.disabled {
+  background-color: #e5e7eb;
+  color: #6b7280;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.book-button.disabled:hover {
+  background-color: #e5e7eb;
+  transform: none;
+  box-shadow: none;
 }

@@ -3,6 +3,7 @@ import BusForm from "../components/BusForm";
 import ScheduleList from "../components/ScheduleList";
 import api from "../utils/api";
 import { AuthContext } from "../context/AuthContext";
+import "./DriverDashboard.css"
 
 const DriverDashboard = () => {
   const { user } = useContext(AuthContext);

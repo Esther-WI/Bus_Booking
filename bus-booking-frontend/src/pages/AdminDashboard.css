@@ -85,21 +85,130 @@
   }
   
   /* Edit forms styling */
-  .edit-form {
+  /* Edit Form Container */
+.edit-form {
     background-color: #ffffff;
     border-radius: 0.75rem;
     padding: 1.5rem;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border: 1px solid #e5e7eb;
+    max-width: 600px;
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
   }
   
+  /* Form Header */
   .edit-form h3 {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     color: #111827;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #e5e7eb;
+  }
+  
+  /* Form Groups */
+  .edit-form .form-group {
+    margin-bottom: 1.25rem;
+  }
+  
+  .edit-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  /* Input Fields */
+  .edit-form input,
+  .edit-form select,
+  .edit-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .edit-form input:focus,
+  .edit-form select:focus,
+  .edit-form textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  /* Form Actions */
+  .edit-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .edit-form button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* Save Button */
+  .edit-form button[type="submit"],
+  .edit-form button:first-child {
+    background-color: rgb(32, 204, 235);
+    color: #000;
+    border: none;
+  }
+  
+  .edit-form button[type="submit"]:hover,
+  .edit-form button:first-child:hover {
+    background-color: #0bbfd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(32, 204, 235, 0.2);
+  }
+  
+  /* Cancel Button */
+  .edit-form button[type="button"],
+  .edit-form button:last-child {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+  }
+  
+  .edit-form button[type="button"]:hover,
+  .edit-form button:last-child:hover {
+    background-color: #e5e7eb;
+  }
+  
+  /* Error Messages */
+  .edit-form .error-message {
+    color: #b91c1c;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .edit-form {
+      padding: 1.25rem;
+    }
+    
+    .edit-form .form-actions {
+      flex-direction: column;
+    }
+    
+    .edit-form button {
+      width: 100%;
+    }
   }
   
   .form-group {

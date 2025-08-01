@@ -1,0 +1,171 @@
+/* DriverDashboard.css */
+.driver-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1f2937;
+  }
+  
+  .driver-dashboard h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #111827;
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+  
+  .driver-dashboard h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #10b981);
+    border-radius: 3px;
+  }
+  
+  .driver-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .driver-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .driver-section h3 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+  }
+  
+  .driver-section h3::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: rgb(32, 204, 235);
+    margin-right: 0.8rem;
+  }
+  
+  .loading {
+    text-align: center;
+    padding: 1.5rem;
+    color: rgb(32, 204, 235);
+    font-weight: 500;
+  }
+  
+  .error-message {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #ef4444;
+  }
+  
+  .no-bus,
+  .no-schedules {
+    text-align: center;
+    padding: 1.5rem;
+    color: #6b7280;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    border: 1px dashed #e5e7eb;
+  }
+  
+  /* Bus Form Styling */
+  .bus-form-container {
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-radius: 0.5rem;
+  }
+  
+  /* Schedule List Styling */
+  /*.schedule-list {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }*/
+  
+  /* Action Buttons */
+  .action-buttons {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+  
+  .action-buttons button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .action-buttons button:first-child {
+    background-color: rgb(32, 204, 235);
+    color: #000;
+    border: none;
+  }
+  
+  .action-buttons button:first-child:hover {
+    background-color: #0bbfd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(32, 204, 235, 0.2);
+  }
+  
+  .action-buttons button:last-child {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+  }
+  
+  .action-buttons button:last-child:hover {
+    background-color: #e5e7eb;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .driver-dashboard {
+      padding: 1rem;
+    }
+    
+    .driver-section {
+      padding: 1.2rem;
+    }
+    
+    /*.schedule-list {
+      grid-template-columns: 1fr;
+    }*/
+    
+    .action-buttons {
+      flex-direction: column;
+    }
+    
+    .action-buttons button {
+      width: 100%;
+    }
+  }
+  
+  /* Animation for status changes */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .driver-section {
+    animation: fadeIn 0.3s ease-out;
+  }

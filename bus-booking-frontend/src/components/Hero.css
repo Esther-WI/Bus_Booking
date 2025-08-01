@@ -66,18 +66,22 @@
 }
 
 .hero-image {
-  flex: 1 1 400px;
+  flex: 1 1 500px;
   text-align: center;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-image img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 600px;
   height: auto;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  /* background-image: url('../assets/bus1.jpeg'); Placeholder for the image */
+  object-fit: cover;
 }
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
