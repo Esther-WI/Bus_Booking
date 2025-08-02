@@ -2,10 +2,10 @@
 
 from flask import Flask
 from flask_cors import CORS
-from server.extensions import db
-from server.config import Config  
-from server.controllers import *
-from server.extensions import db, jwt, migrate
+from extensions import db
+from config import Config  
+from controllers import *
+from extensions import db, jwt, migrate
 
 app = Flask(__name__)
 app.config.from_object(Config)
