@@ -1,6 +1,6 @@
 # models/review.py
 
-from server.extensions import db
+from extensions import db
 from datetime import datetime
 from sqlalchemy.orm import validates
 

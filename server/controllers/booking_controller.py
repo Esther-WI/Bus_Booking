@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
-from server.models import Booking, Schedule
+from models import Booking, Schedule
 from sqlalchemy.orm import joinedload
-from server.extensions import db
+from extensions import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from server.utils.auth import role_required, current_user
+from utils.auth import role_required, current_user
 
 booking_bp = Blueprint("bookings", __name__, url_prefix="/api/bookings")
 

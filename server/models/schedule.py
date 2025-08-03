@@ -1,4 +1,4 @@
-from server.extensions import db
+from extensions import db
 from sqlalchemy.orm import validates
 
 class Schedule(db.Model):

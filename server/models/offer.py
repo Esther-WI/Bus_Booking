@@ -1,4 +1,4 @@
-from server.extensions import db
+from extensions import db
 class Offer(db.Model):
     __tablename__ = 'offers'
 

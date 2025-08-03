@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
-from server.models import Bus,Review,User
-from server.extensions import db
+from models import Bus,Review,User
+from extensions import db
 from sqlalchemy.orm import joinedload
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from server.utils.auth import role_required, current_user
+from utils.auth import role_required, current_user
 from datetime import datetime
 
 bus_bp = Blueprint("buses", __name__, url_prefix="/api/buses")

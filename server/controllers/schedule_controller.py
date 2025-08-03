@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
-from server.models import Schedule, Route, Bus,User
-from server.extensions import db
+from models import Schedule, Route, Bus,User
+from extensions import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from server.utils.auth import role_required
+from utils.auth import role_required
 from sqlalchemy.orm import joinedload
 
 schedule_bp = Blueprint("schedules", __name__, url_prefix="/api/schedules")

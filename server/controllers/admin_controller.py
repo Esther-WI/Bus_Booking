@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from server.models import User, Bus, Schedule
-from server.utils.auth import role_required, current_user
-from server.extensions import db
+from models import User, Bus, Schedule
+from utils.auth import role_required, current_user
+from extensions import db
 from sqlalchemy.exc import IntegrityError
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/api/admin')

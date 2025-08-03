@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
-from server.models import Offer
-from server.extensions import db
+from models import Offer
+from extensions import db
 from flask_jwt_extended import jwt_required
-from server.utils.auth import role_required
+from utils.auth import role_required
 
 offer_bp = Blueprint("offers", __name__, url_prefix="/api/offers")
 

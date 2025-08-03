@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from server.models import Route,Schedule,Bus
-from server.extensions import db
-from server.utils.auth import role_required
+from models import Route,Schedule,Bus
+from extensions import db
+from utils.auth import role_required
 from flask_jwt_extended import jwt_required
 from datetime import datetime
 
