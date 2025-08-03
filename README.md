@@ -5,6 +5,11 @@
 [![Node.js](https://img.shields.io/badge/Node.js-16+-green.svg)](https://nodejs.org)
 [![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org)
 
+## Live Deployment
+
+- **Frontend (Vercel)**: [https://bus-booking-mocha.vercel.app/](https://bus-booking-mocha.vercel.app/)
+- **Backend (Render)**: [https://bus-booking-backend-krhk.onrender.com](https://bus-booking-backend-krhk.onrender.com)
+
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Team Members](#team-members)
