@@ -8,8 +8,14 @@ flask = "*"
 flask-cors = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
+flask-jwt-extended = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+gunicorn = "*"
+marshmallow = "*"
+flask-marshmallow = "*"
+email-validator = "*"
+requests = "*"
 
 [dev-packages]
 
