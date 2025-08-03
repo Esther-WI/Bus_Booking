@@ -16,6 +16,7 @@ marshmallow = "*"
 flask-marshmallow = "*"
 email-validator = "*"
 requests = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 
