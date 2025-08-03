@@ -3,7 +3,7 @@ import UserList from "../components/UserList";
 import ScheduleList from "../components/ScheduleList";
 import BusForm from "../components/BusForm";
 import api from "../utils/api";
-import "./AdminDashBoard.css"
+import "./AdminDashboard.css"
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
